@@ -4,13 +4,14 @@ include '../db_config.php';
 $number = $_POST['number'];
 
 if($number){
-    $sql = "SELECT * FROM members where accno='".$number."'";
+    $sql = "SELECT * FROM members where accno='".$number."' AND status=1";
     if($result = $pdo->query($sql)){
         if($result->rowCount() > 0){
             while($row = $result->fetch()){
                 echo json_encode(array(
                     'id' => $row['id'],
                     'divers' => $row['diver'],
+                     'accno' => $row['accno'],
                     'titre' => $row['titre'],
                     'addresse' => $row['addresse'],
                     'cp' => $row['cp'],
@@ -18,6 +19,9 @@ if($number){
                     'email' => $row['email'],
                     'naissance' => $row['naissance'],
                     'telephone' => $row['tele'],
+                    'communication' => $row['communication'],
+                    'rubans' => $row['rubans'],
+                    'newsletter' => $row['newsletter'],
                     'dervst' => $row['dervst'],
                     'cumulvst' => $row['cumulvst'],
                 ));

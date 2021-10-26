@@ -2,9 +2,9 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="index.php">
+            <a class="nav-link" href="<?php echo $baseurl;?>index.php">
               <i class="icon-grid menu-icon"></i>
-              <span class="menu-title">Dashboard</span>
+              <span class="menu-title">Tableau de bord</span>
             </a>
           </li>
           <li class="nav-item">
@@ -15,10 +15,16 @@
             </a>
             <div class="collapse" id="members">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/add_members.php">Add Members</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/all_members.php">All Members</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo $baseurl;?>add_members.php">Add Member</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo $baseurl;?>all_members.php">All Members</a></li>
               </ul>
             </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo $baseurl;?>pages/add_transaction.php">
+              <i class="icon-layers menu-icon"></i>
+              <span class="menu-title">Add Transaction</span>
+            </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#reports" aria-expanded="false" aria-controls="ui-basic">
@@ -28,8 +34,9 @@
             </a>
             <div class="collapse" id="reports">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/add_members.php">Search Reports</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/all_members.php">Monthly Reports</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo $baseurl;?>pages/reports/yearly_reports.php">Yearly Reports</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo $baseurl;?>pages/reports/custom_reports.php">Custom Reports</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo $baseurl;?>pages/reports/saved_queries.php">Saved Queries</a></li>
               </ul>
             </div>
           </li>

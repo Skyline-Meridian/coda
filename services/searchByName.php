@@ -14,6 +14,7 @@ if($name){
                 $output[$i] = array(
                     'id' => $row['id'],
                     'name' => $row['intitule'],
+                    'accno' => $row['accno'],
                     'divers' => $row['diver'],
                     'titre' => $row['titre'],
                     'addresse' => $row['addresse'],
