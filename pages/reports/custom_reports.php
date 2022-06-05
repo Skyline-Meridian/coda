@@ -516,7 +516,7 @@ if (!$_SESSION['id']) {
                             data: tableData,
                             url: '../../services/reports/downloadxlsreports.php',
                             success: function(data) {
-                                console.log(data);
+                                // console.log(data);
                                 var blob = new Blob([data], {
                                     type: 'application/vnd.ms-excel'
                                 });
@@ -539,7 +539,7 @@ if (!$_SESSION['id']) {
                             data: tableData,
                             url: '../../services/reports/downloadcsvreports.php',
                             success: function(data) {
-                                console.log(data);
+                                // console.log(data);
                                 var blob = new Blob([data], {
                                     type: "octet/stream"
                                 });

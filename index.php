@@ -1,7 +1,7 @@
 <?php
 include 'header.php';
 include 'db_config.php';
-session_start();
+// session_start();
 if (!$_SESSION['auth']) {
     header('location:pages/login.php');
 }

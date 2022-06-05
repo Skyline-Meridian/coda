@@ -80,10 +80,10 @@ if (!$_SESSION['id']) {
                                     </table>
                                 </div>
                             </div>
-                            <!-- <div class="hidden-items p-3">
+                            <div class="hidden-items p-3">
                                 <button class="btn btn-success" id="download_csv">Télécharger en CSV</button>
                                 <button class="btn btn-success" id="download_xls">Télécharger en XLS</button>
-                            </div> -->
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -184,16 +184,6 @@ if (!$_SESSION['id']) {
                             {
                                 "data": "remarks"
                             },
-                            // {
-                            //     "mRender": function(data, type, row) {
-                            //         return '<a href=saved_query_reports.php?id=' + row.id + '>Montrer le rapport </a>';
-                            //     }
-                            // },
-                            // {
-                            //     "mRender": function(data, type, row) {
-                            //         return '<a class="view" href=saved_query_reports.php?id=' + row.id + '><i class="ti-eye"></i> </a><a class="del" href=../../services/deletequery.php?id=' + row.id + '><i class="ti-trash"></i></a>';
-                            //     }
-                            // }
                         ],
                     });
 
@@ -207,5 +197,47 @@ if (!$_SESSION['id']) {
                         // Toggle the visibility
                         column.visible(!column.visible());
                     });
+
+                    // download as excel function
+                    $("#download_xls").on('click', function() {
+                        $.ajax({
+                            type: 'post',
+                            url: '../../services/reports/downloadxlsdonorreports.php',
+                            success: function(data) {
+                                // console.log(data);
+                                var blob = new Blob([data], {
+                                    type: 'application/vnd.ms-excel'
+                                });
+                                var downloadUrl = URL.createObjectURL(blob);
+                                var a = document.createElement("a");
+                                a.href = downloadUrl;
+                                a.download = "downloadDonateurFile.xls";
+                                document.body.appendChild(a);
+                                a.click();
+                            }
+
+                        })
+                    })
+
+                    // download as csv function
+                    $("#download_csv").on('click', function() {
+                        $.ajax({
+                            type: 'post',
+                            url: '../../services/reports/downloadcsvdonorreports.php',
+                            success: function(data) {
+                                // console.log(data);
+                                var blob = new Blob([data], {
+                                    type: "octet/stream"
+                                });
+                                var downloadUrl = URL.createObjectURL(blob);
+                                var a = document.createElement("a");
+                                a.href = downloadUrl;
+                                a.download = "downloadDonateurFile.csv";
+                                document.body.appendChild(a);
+                                a.click();
+                            }
+
+                        })
+                    })
                 })
             </script>
