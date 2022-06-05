@@ -93,6 +93,7 @@ class TransactionParser
 		$account = $accountOtherPartyParser->parse($linesWithAccountInfo);
 
 		$message = $this->constructMessage($lines);
+		$address = $this->constructAddress($lines);
 
 		return new Transaction(
 			$account,
@@ -103,6 +104,7 @@ class TransactionParser
 			$amount,
 			$message,
 			$structuredMessage,
+			$address,
 			$sepaDirectDebit,
 			$transactionCode
 		);
@@ -131,38 +133,69 @@ class TransactionParser
 					$message = $line->getMessage();
 				}
 				return $message?$message->getValue():"";
+				// return $message?$message->getValue():$line->getMessage();
 			}, $transactionLines));
 
 		if (!$message) {
+		// if (1 == 1) {
 			/** @var TransactionPart2Line|null $transactionLine */
 			$transactionLine = getFirstLineOfType($lines, new LineType(LineType::TransactionPart2));
 			if ($transactionLine && !empty($transactionLine->getClientReference()->getValue())) {
 				$message = $transactionLine->getClientReference()->getValue();
 			}
 
-			$informationLines = filterLinesOfTypes(
-				$lines,
-				[
-					new LineType(LineType::InformationPart1),
-					new LineType(LineType::InformationPart2),
-					new LineType(LineType::InformationPart3)
-				]);
+			// $informationLines = filterLinesOfTypes(
+			// 	$lines,
+			// 	[
+			// 		new LineType(LineType::InformationPart1),
+			// 		new LineType(LineType::InformationPart2),
+			// 		new LineType(LineType::InformationPart3)
+			// 	]);
 
-			if ($message) {
-				$message .= " ";
-			}
-			$message .= implode('', array_map(function($line) {
-				/** @var Message|null $message */
-				$message = null;
-				if (method_exists($line, 'getMessageOrStructuredMessage')) {
-					$message = $line->getMessageOrStructuredMessage()->getMessage();
-				} else {
-					$message = $line->getMessage();
-				}
-				return $message?$message->getValue():"";
-			}, $informationLines));
+		// 	if ($message) {
+		// 		$message .= "&%&";
+		// 	}
+		// 	$message .= implode('', array_map(function($line) {
+		// 		/** @var Message|null $message */
+		// 		$message = null;
+		// 		if (method_exists($line, 'getMessageOrStructuredMessage')) {
+		// 			$message = $line->getMessageOrStructuredMessage()->getMessage();
+		// 		} else {
+		// 			$message = $line->getMessage();
+		// 		}
+		// 		return $message?$message->getValue():"";
+		// 	}, $informationLines));
 		}
 
 		return trim($message);
+	}
+
+	/**
+	 * @param LineInterface[] $lines
+	 * @return string
+	 */
+	private function constructAddress(array $lines)
+	{
+		$address = '';
+		$informationLines = filterLinesOfTypes(
+			$lines,
+			[
+				new LineType(LineType::InformationPart1),
+				new LineType(LineType::InformationPart2),
+				new LineType(LineType::InformationPart3)
+			]);
+
+			$address .= implode('', array_map(function($line) {
+				/** @var Address|null $address */
+				$address = null;
+				if (method_exists($line, 'getMessageOrStructuredMessage')) {
+					$address = $line->getMessageOrStructuredMessage()->getMessage();
+				} else {
+					$address = $line->getMessage();
+				}
+				return $address?$address->getValue():"";
+			}, $informationLines));
+
+		return trim($address);
 	}
 }

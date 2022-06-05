@@ -1,0 +1,144 @@
+<table cellpadding="5" cellspacing="0" border="0" style="width: 100%">
+    <tr class="expanded-row">
+        <td colspan="8" class="row-bg">
+            <div class="d-flex justify-content-between">
+                <div class="cell-hilighted">
+                    <form action="" class="mem" name="mem" method="post">
+                        <div class="d-flex">
+                            <div class="mr-2 min-width-cell">
+                                <p>Titre</p>
+                                <div class="form-group">
+                                    <input type="hidden" class="member_id" name="member_id" />
+                                    <input type="text" class="form-control titre" name="titre" />
+                                </div>
+                            </div>
+                            <div class="mr-2 min-width-cell">
+                                <p>Nom</p>
+                                <div class="form-group">
+                                    <input type="text" class="form-control intitule" name="intitule" />
+                                </div>
+                            </div>
+                            <div class="mr-2 min-width-cell">
+                                <p>Numéro Compte</p>
+                                <div class="form-group">
+                                    <input type="text" class="form-control acn" name="acn" readonly />
+                                </div>
+                            </div>
+                            <div class="mr-2 min-width-cell">
+                                <p>Divers</p>
+                                <div class="form-group">
+                                    <input type="text" class="form-control divers" name="divers" list="diveroptions" />
+                                    <datalist id="diveroptions">
+                                        <option value="Testament"></option>
+                                        <option value="Testament/Retour"></option>
+                                        <option value="Retour"></option>
+                                        <option value="BW"></option>
+                                        <option value="BX"></option>
+                                        <option value="HT"></option>
+                                        <option value="LG"></option>
+                                        <option value="LX"></option>
+                                        <option value="NR"></option>
+                                        <option value="PAYPAL"></option>
+                                        <option value="PC"></option>
+                                        <option value="PAS ATTESTATION"></option>
+                                        <option value="DCD"></option>
+                                    </datalist>
+                                </div>
+                            </div>
+                            <div class="mr-2 min-width-cell">
+                                <p>Naissance</p>
+                                <div class="form-group">
+                                    <input type="date" class="form-control naissance" name="naissance" />
+                                </div>
+                            </div>
+                            <div class="mr-2 min-width-cell">
+                                <p>Dernier Versement</p>
+                                <div class="form-group">
+                                    <input type="date" class="form-control dervst" name="dervst" readonly />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="mr-2 min-width-cell">
+                                <p>Adresse</p>
+                                <div class="form-group">
+                                    <input type="text" class="form-control addresse" name="addresse" />
+                                </div>
+                                <div class="min-width-cell">
+                                    <p>Communication</p>
+                                    <input type="text" class="form-control communication" name="communication" />
+                                </div>
+                                <p><small>**Effacer le champ pour ajouter</small></p>
+                            </div>
+                            <div class="mr-2 min-width-cell">
+                                <p>Ville</p>
+                                <div class="form-group">
+                                    <input type="text" class="form-control localite" name="localite" />
+                                </div>
+                                <div class="min-width-cell">
+                                    <p>Remarques</p>
+                                    <input type="text" class="form-control remarks" name="remarks" />
+                                </div>
+                            </div>
+                            <div class="mr-2 min-width-cell">
+                                <p>Code Postal</p>
+                                <div class="form-group">
+                                    <input type="text" class="form-control cp" name="cp" />
+                                </div>
+                                <div class="mr-2 min-width-cell">
+                                    <p>Numéro enterprise</p>
+                                    <input type="text" class="form-control numero-enterprise"
+                                        name="numero-enterprise" />
+                                </div>
+                            </div>
+                            <div class="mr-2 min-width-cell">
+                                <p>Email</p>
+                                <div class="form-group">
+                                    <input type="email" class="form-control email" name="email" />
+                                </div>
+                            </div>
+                            <div class="mr-2 min-width-cell">
+                                <p>Telephone</p>
+                                <div class="form-group">
+                                    <input type="text" class="form-control telephone" name="telephone" />
+                                </div>
+                                <div class="form-check form-check-info mt-5">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input extourne" />Extourne<i
+                                            class="input-helper"></i>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mr-2 min-width-cell">
+                                <p>Vers Cummulés</p>
+                                <div class="form-group">
+                                    <input type="text" class="form-control cumulvst" name="cumulvst" readonly />
+                                </div>
+                                <div class="min-width-cell extourne-monant">
+                                    <p>Montant à réduire</p>
+                                    <input type="number" class="form-control extourne-monant-input" name="extourne"
+                                        value="0" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <button type="submit" name="searchname" class="btn btn-light searchname mr-2">
+                                Recherche par nom
+                            </button>
+                            <button type="submit" name="searchname" class="btn btn-light searchname mr-2">
+                                Recherche par CP
+                            </button>
+                            <button type="submit" name="insertdb" class="btn btn-info insertdb mr-2 ml-auto">
+                                Ajouter membre
+                            </button>
+                            <button type="submit" name="updatedb" class="btn btn-success updatedb mr-2 ml-auto">
+                                Mettre à jour
+                            </button>
+                        </div>
+                        <div class="success-message mt-2"></div>
+                    </form>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>

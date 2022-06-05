@@ -11,7 +11,7 @@ if($number){
                 echo json_encode(array(
                     'id' => $row['id'],
                     'divers' => $row['diver'],
-                     'accno' => $row['accno'],
+                    'accno' => $row['accno'],
                     'titre' => $row['titre'],
                     'addresse' => $row['addresse'],
                     'cp' => $row['cp'],
@@ -20,8 +20,7 @@ if($number){
                     'naissance' => $row['naissance'],
                     'telephone' => $row['tele'],
                     'communication' => $row['communication'],
-                    'rubans' => $row['rubans'],
-                    'newsletter' => $row['newsletter'],
+                    'numero_enterprise' => $row['numero_enterprise'],
                     'dervst' => $row['dervst'],
                     'cumulvst' => $row['cumulvst'],
                 ));

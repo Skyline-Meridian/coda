@@ -1,9 +1,12 @@
 <?php
-include 'header.php';
-include 'db_config.php';
+include '../header.php';
+include '../db_config.php';
+if(!$_SESSION['id']){
+header('location:login.php');
+}
 ?>
 <!-- Navbar -->
-<?php include 'navbar.php'; ?>
+<?php include '../navbar.php'; ?>
 <div class="container-fluid page-body-wrapper">
     <!-- setting bar  -->
     <? //php include 'settingbar.php';
@@ -13,20 +16,20 @@ include 'db_config.php';
     ?>
     <!-- partial -->
     <!-- sidebar offcampus  -->
-    <?php include 'sidebar-offcanvas.php'; ?>
+    <?php include '../sidebar-offcanvas.php'; ?>
     <!-- partial -->
     <div class="main-panel">
         <div class="content-wrapper">
 
             <!-- Coda upload and basic data display -->
             <?php
-            $page_title = "Add New Member";
+            $page_title = "Ajouter un nouveau membre";
             if (!empty($_REQUEST['id'])) {
                 $query = "SELECT * FROM members where id='" . $_REQUEST['id'] . "'";
                 $result = $pdo->query($query);
                 $count = $result->rowCount();
                 $row = $result->fetch();
-                $page_title = "Edit Member";
+                $page_title = "Modifier le membre";
             }
             ?>
 
@@ -57,7 +60,7 @@ include 'db_config.php';
                                             </div>
                                         </div>
                                         <div class="mr-2 min-width-cell">
-                                            <p>Intitule</p>
+                                            <p>Nom</p>
                                             <div class="form-group">
                                                 <input type="text" class="form-control intitule" name="intitule" 
                                                 value="<?php 
@@ -68,7 +71,7 @@ include 'db_config.php';
                                             </div>
                                         </div>
                                         <div class="mr-2 min-width-cell">
-                                            <p>Acc Number</p>
+                                            <p>N° de compte</p>
                                             <div class="form-group">
                                                 <input type="text" class="form-control acn" name="acn" value="<?php 
                                                 if (!empty($row['accno'])) {
@@ -113,23 +116,23 @@ include 'db_config.php';
                                             </div>
                                         </div>
                                         <div class="mr-2 min-width-cell">
-                                            <p>Dervst</p>
+                                            <p>Dernier versement</p>
                                             <div class="form-group">
                                                 <input type="date" class="form-control dervst" name="dervst" 
-                                                value="<?php if (!empty($row['dervst'])) {echo $row['dervst'];} ?>">
+                                                value="<?php if (!empty($row['dervst'])) {echo $row['dervst'];} ?>" readonly>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="d-flex">
                                         <div class="mr-2 min-width-cell">
-                                            <p>Addresse</p>
+                                            <p>Adresse</p>
                                             <div class="form-group">
                                                 <input type="text" class="form-control addresse" name="addresse" 
                                                 value="<?php if (!empty($row['addresse'])) {echo $row['addresse'];} ?>">
                                             </div>
                                         </div>
                                         <div class="mr-2 min-width-cell">
-                                            <p>Localite</p>
+                                            <p>Ville</p>
                                             <div class="form-group">
                                                 <input type="text" class="form-control localite" name="localite" 
                                                 value="<?php if (!empty($row['localite'])) {echo $row['localite'];} ?>">
@@ -157,56 +160,46 @@ include 'db_config.php';
                                             </div>
                                         </div>
                                         <div class="mr-2 min-width-cell">
-                                            <p>Cumulvst</p>
+                                            <p>Versements cumulés</p>
                                             <div class="form-group">
                                                 <input type="text" class="form-control cumulvst" name="cumulvst" 
-                                                value="<?php if (!empty($row['cumulvst'])) {echo $row['cumulvst'];} ?>">
+                                                value="<?php if (!empty($row['cumulvst'])) {echo $row['cumulvst'];} ?>" readonly>
                                             </div>
                                         </div>
 
                                     </div>
 
                                     <div class="d-flex">
-                                         <div class="mr-2 min-width-cell">
-                                            <p>Communication</p>
+                                        <div class="mr-2 min-width-cell">
+                                            <p>Communication*</p>
                                             <div class="form-group">
-                                                <input type="text" class="form-control cumulvst" name="communication" 
+                                                <input type="text" class="form-control communication" name="communication" 
                                                 value="<?php if (!empty($row['communication'])) {echo $row['communication'];} ?>">
-                                            </div>
-                                        </div>
-                                         <div class="mr-2 min-width-cell">
-                                            <p>Rubans</p>
-                                            <div class="form-group">
-                                                <input type="text" class="form-control rubans" name="rubans" 
-                                                value="<?php if (!empty($row['rubans'])) {echo $row['rubans'];} ?>">
-                                            </div>
-                                        </div>
-                                         <div class="mr-2 min-width-cell">
-                                            <p>Newsletter</p>
-                                            <div class="form-group">
-                                                <input type="text" class="form-control newsletter" name="newsletter" 
-                                                value="<?php if (!empty($row['newsletter'])) {echo $row['newsletter'];} ?>">
+                                                <p><small> * Effacer le champ pour ajouter</small></p>
                                             </div>
                                         </div>
                                         <div class="mr-2 min-width-cell">
+                                            <p>Numero Enterprise</p>
+                                            <div class="form-group">
+                                            <input type="text" class="form-control numero_enterprise" name="numero_enterprise" 
+                                                value="<?php if (!empty($row['numero_enterprise'])) {echo $row['numero_enterprise'];} ?>">
+                                            </div>
+                                        </div>
+                                        <div class="mr-2 min-width-cell flex-grow-1">
                                             <div class="form-group">
 
                                             </div>
                                         </div>
-                                        <div class="mr-2 min-width-cell">
-                                            <div class="form-group">
-
-                                            </div>
-                                        </div>
+                                                                                
                                           <div class="mr-2 min-width-cell">
                                             <p>&nbsp;</p>
                                             <div class="form-group">
 
                                             <?php if (!empty($_REQUEST['id'])) { ?>
-                                            <button type="button" name="updatedb" id="updatedb" class="btn btn-info updatedb mr-2 ml-auto">Update</button>
+                                            <button type="button" name="updatedb" id="updatedb" class="btn btn-success updatedb mr-2 ">Mettre à jour</button>
                                             <!-- <button type="button" name="deletedb" id="deletedb" class="btn btn-danger deletedb mr-2 ml-auto">Delete</button> -->
                                         <?php } else { ?>
-                                            <button type="button" name="insertdb" id="insertdb" class="btn btn-info insertdb mr-2 ml-auto">Add new member</button>
+                                            <button type="button" name="insertdb" id="insertdb" class="btn btn-info insertdb mr-2 flex-grow-1">Ajouter un membre</button>
                                         <?php } ?>
                                     </div>
                                     <div class="success-message mt-2"></div>
@@ -218,7 +211,7 @@ include 'db_config.php';
                 </div>
             </div>
 
-            <?php include 'footer.php'; ?>
+            <?php include '../footer.php'; ?>
             
             <script>
                 // INSERT Company INTO DB
@@ -229,9 +222,9 @@ include 'db_config.php';
                         type: "POST", // type POST
                         // all form data
                         data: data1,
-                        url: 'services/insertmember.php', // backend URL to insert data into database
+                        url: '../services/insertmember.php', // backend URL to insert data into database
                         success: function(data) {
-                            alert('member has been added successfully');
+                            alert('le membre a été ajouté avec succès');
                             window.location.href = "all_members.php";
                         }
                     })
@@ -244,9 +237,9 @@ include 'db_config.php';
                         type: "POST", // type POST
                         // all form data
                         data: data1,
-                        url: 'services/insertmember.php', // backend URL to insert data into database
+                        url: '../services/insertmember.php', // backend URL to insert data into database
                         success: function(data) {
-                            alert('member has been updated successfully');
+                            alert('le membre a été mis à jour avec succès');
                             window.location.href = "all_members.php";
                         }
                     })

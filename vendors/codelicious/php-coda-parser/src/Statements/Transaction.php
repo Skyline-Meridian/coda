@@ -28,6 +28,8 @@ class Transaction
     private $message;
     /** @var string */
     private $structuredMessage;
+    /** @var string */
+    private $address;
     /** @var SepaDirectDebit|null */
     private $sepaDirectDebit;
     /** @var TransactionCode|null */
@@ -42,6 +44,7 @@ class Transaction
      * @param float $amount
      * @param string $message
      * @param string $structuredMessage
+     * @param string $address
      * @param SepaDirectDebit|null $sepaDirectDebit
      */
     public function __construct(
@@ -53,6 +56,7 @@ class Transaction
         float $amount,
         string $message,
         string $structuredMessage,
+        string $address,
         $sepaDirectDebit,
         TransactionCode $transactionCode
     )
@@ -65,6 +69,7 @@ class Transaction
         $this->amount = $amount;
         $this->message = $message;
         $this->structuredMessage = $structuredMessage;
+        $this->address = $address;
         $this->sepaDirectDebit = $sepaDirectDebit;
         $this->transactionCode = $transactionCode;
     }
@@ -97,6 +102,11 @@ class Transaction
     public function getStructuredMessage(): string
     {
         return $this->structuredMessage;
+    }
+
+    public function getAddress(): string
+    {
+        return $this->address;
     }
 
     /**

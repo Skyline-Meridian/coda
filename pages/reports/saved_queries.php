@@ -1,6 +1,9 @@
 <?php
 include '../../header.php';
 include '../../db_config.php';
+if(!$_SESSION['id']){
+header('location:../login.php');
+}
 ?>
 <!-- Navbar -->
 <?php include '../../navbar.php'; ?>
@@ -15,8 +18,8 @@ include '../../db_config.php';
             <div class="col-md-12 grid-margin">
                 <div class="row">
                     <div class="col-12 col-xl-8 mb-4">
-                        <h3 class="font-weight-bold">Previously Saved Queries</h3>
-                        <h6 class="font-weight-normal mb-0">Select the query you want to get report for.</h6>
+                        <h3 class="font-weight-bold">Requête enregistrées</h3>
+                        <h6 class="font-weight-normal mb-0">Selectionner une requête pour afficher le rapport.</h6>
                     </div>
                 </div>
             </div>
@@ -34,9 +37,10 @@ include '../../db_config.php';
                                     <table id="query_table" class="display expandable-table" style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th width="30%">Query No</th>
-                                                <th width="50%">Query Name</th>
-                                                <th width="20%">Show Report</th>
+                                                <th width="30%">Requête</th>
+                                                <th width="50%">Titre</th>
+                                                 <th width="50%">Date</th>
+                                                <th width="20%">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody></tbody>
@@ -58,14 +62,24 @@ include '../../db_config.php';
                         ajax: {
                             type: 'post',
                             url: '../../services/reports/get_saved_queries.php',
-                            dataSrc: ''
+                            dataSrc: '',
                         },
                         columns: [
                             { "data": "id" },
                             { "data": "query_name" },
+                            { "data": "added_date",
+                                render: function (data, type, row) {
+                                    return moment(new Date(data).toString()).format('DD-MM-YYYY');
+                                }
+                            },
+                            // {
+                            //     "mRender": function(data, type, row) {
+                            //         return '<a href=saved_query_reports.php?id=' + row.id + '>Montrer le rapport </a>';
+                            //     }
+                            // },
                             {
                                 "mRender": function(data, type, row) {
-                                    return '<a href=saved_query_reports.php?id=' + row.id + '>Show Report </a>';
+                                    return '<a class="view" href=saved_query_reports.php?id=' + row.id + '><i class="ti-eye"></i> </a><a class="del" href=../../services/deletequery.php?id=' + row.id + '><i class="ti-trash"></i></a>';
                                 }
                             }
                         ],

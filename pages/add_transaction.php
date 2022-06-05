@@ -1,6 +1,9 @@
 <?php
 include '../header.php';
 include '../db_config.php';
+if(!$_SESSION['id']){
+header('location:login.php');
+}
 ?>
 <!-- Navbar -->
 <style>
@@ -29,17 +32,17 @@ include '../db_config.php';
                     <div class="card">
                         <div class="card-body">
                             <div class="col-12 my-4">
-                                <h3 class="font-weight-bold">Add Transaction Manually</h3>
-                                <h6 class="font-weight-normal mb-4">Choose your account number, then find the member and add transaction.</h6>
+                                <h3 class="font-weight-bold">Ajouter une transaction manuellement</h3>
+                                <h6 class="font-weight-normal mb-4">Selectionner le N° de compte, Rechercher le membre puis ajouter la transaction</h6>
                             </div>
                             <div class="col-12 mb-4">
                                 <form action="" name="transaction" id="transaction" method="post">
                                     <div class="d-flex">
 
                                         <div class="form-group mx-2">
-                                            <label for="select_acc_no">Select Your Account No.</label>
+                                            <label for="select_acc_no">Sélectionnerr le N° de compte</label>
                                             <select name="select_acc_no" id="select_acc_no" class="form-control">
-                                                <option selected disabled hidden>Select Account Number</option>
+                                                <option selected disabled hidden>Sélectionnerr N° de compte</option>
                                                 <option value="BE04250007201731">BE04 2500 0720 1731</option>
                                                 <option value="BE26001202832029">BE26 0012 0283 2029</option>
                                                 <option value="BE27001709215273">BE27 0017 0921 5273</option>
@@ -60,8 +63,8 @@ include '../db_config.php';
                                         </div>
 
                                         <div class="form-group mx-2">
-                                            <label>Account Name</label>
-                                            <input type="text" name="acc_name" id="acc_name" class="form-control" placeholder="Account Name" aria-label="account_name">
+                                            <label>Bénéficiaire</label>
+                                            <input type="text" name="acc_name" id="acc_name" class="form-control" placeholder="Bénéficiaire" aria-label="account_name">
                                         </div>
                                         <div class="form-group mx-2">
                                             <label>BIC</label>
@@ -75,31 +78,31 @@ include '../db_config.php';
                                     </div>
                                     <div class="d-flex">
                                         <div class="form-group mx-2">
-                                            <label>Search Member by Name</label>
-                                            <input type="text" class="form-control" id="searchByName" placeholder="Intitule" aria-label="members_name">
+                                            <label>Rechercher un membre</label>
+                                            <input type="text" class="form-control" id="searchByName" placeholder="Nom" aria-label="members_name">
                                             <div class="success-message m-2 mt-4"></div>
                                         </div>
                                         <div class="form-group mx-2 pt-2">
-                                            <button class="btn btn-info mt-4" id="searchByNameBtn">Search Members</button>
+                                            <button class="btn btn-info mt-4" id="searchByNameBtn">Rechercher</button>
                                         </div>
 
                                         <div class="member-block p-4" style="flex:1">
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <h5 class="mb-3"><b>Titre: </b><span class="titre"></span></h5>
-                                                    <h5 class="mb-3"><b>Intitule: </b><span class="intitule"></span></h5>
-                                                    <h5 class="mb-3"><b>Acc No: </b><span class="accno"></span></h5>
+                                                    <h5 class="mb-3"><b>Nom: </b><span class="intitule"></span></h5>
+                                                    <h5 class="mb-3"><b>N° compte: </b><span class="accno"></span></h5>
                                                     <h5 class="mb-3"><b>Email: </b><span class="email"></span></h5>
-                                                    <h5 class="mb-3"><b>Telephone: </b><span class="tele"></span></h5>
-                                                    <h5 class="mb-3"><b>Diver: </b><span class="divers"></span></h5>
+                                                    <h5 class="mb-3"><b>Téléphone: </b><span class="tele"></span></h5>
+                                                    <h5 class="mb-3"><b>Divers: </b><span class="divers"></span></h5>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <h5 class="mb-3"><b>Addresse: </b><span class="addresse"></span></h5>
-                                                    <h5 class="mb-3"><b>Localite: </b><span class="localite"></span></h5>
+                                                    <h5 class="mb-3"><b>Adresse: </b><span class="addresse"></span></h5>
+                                                    <h5 class="mb-3"><b>Ville: </b><span class="localite"></span></h5>
                                                     <h5 class="mb-3"><b>Code Postal: </b><span class="cp"></span></h5>
                                                     <h5 class="mb-3"><b>Naissance: </b><span class="naissance"></span></h5>
-                                                    <h5 class="mb-3"><b>Dervst: </b><span class="dervst"></span></h5>
-                                                    <h5 class="mb-3"><b>Cumulvst: </b><span class="cumulvst"></span></h5>
+                                                    <h5 class="mb-3"><b>Dernier Versement: </b><span class="dervst"></span></h5>
+                                                    <h5 class="mb-3"><b>Versements Cumulés: </b><span class="cumulvst"></span></h5>
                                                 </div>
                                             </div>
                                         </div>
@@ -108,24 +111,24 @@ include '../db_config.php';
                                     <div class="d-flex mt-4">
 
                                         <div class="form-group mx-2">
-                                            <label>Transaction Date</label>
+                                            <label>Date de transaction</label>
                                             <input type="hidden" class="form-control member_id" name="member_id">
                                             <input type="date" class="form-control transaction_date" name="tr_date" placeholder="Transaction date" aria-label="transaction_date">
                                         </div>
                                         <div class="form-group mx-2">
-                                            <label>Transaction Currency</label>
+                                            <label>Devise</label>
                                             <input type="text" class="form-control transaction_currency" name="tr_curr" value="EUR" aria-label="transaction_currency" readonly>
                                         </div>
                                         <div class="form-group mx-2">
-                                            <label>Transaction Amount</label>
-                                            <input type="text" class="form-control transaction_amount" name="tr_amount" placeholder="Amount" aria-label="transaction_amount">
+                                            <label>Montant de la transaction</label>
+                                            <input type="text" class="form-control transaction_amount" name="tr_amount" placeholder="Montant" aria-label="transaction_amount">
                                         </div>
                                         <div class="form-group mx-2">
-                                            <label>Remarks</label>
-                                            <input type="text" class="form-control transaction_msg" name="remarks" placeholder="Remarks" aria-label="transaction_msg">
+                                            <label>Remarque</label>
+                                            <input type="text" class="form-control transaction_msg" name="remarks" placeholder="Remarque" aria-label="transaction_msg">
                                         </div>
                                         <div class="form-group mx-2 pt-2">
-                                            <button class="btn btn-primary mt-4" id="addTransaction">Add New Transaction</button>
+                                            <button class="btn btn-primary mt-4" id="addTransaction">Ajouter la transaction</button>
                                         </div>
 
                                     </div>
@@ -188,11 +191,11 @@ include '../db_config.php';
                                     $(".cp").text(data[i].cp);
                                     $(".localite").text(data[i].localite);
                                     $(".email").text(data[i].email);
-                                    $(".naissance").text(data[i].naissance);
+                                    $(".naissance").text(moment(new Date(data[i].naissance).toString()).format('DD-MM-YYYY'));
                                     $(".telephone").text(data[i].telephone);
-                                    $(".dervst").text(+data[i].dervst);
-                                    $(".cumulvst").text(+data[i].cumulvst);
-                                    $(".remarks").text(+data[i].remarks);
+                                    $(".dervst").text(moment(new Date(data[i].dervst).toString()).format('DD-MM-YYYY'));
+                                    $(".cumulvst").text(+data[i].cumulvst+' €');
+                                    // $(".remarks").text(+data[i].remarks);
                                 })
                             } // success function end
                         }) // Ajax end   
@@ -225,11 +228,11 @@ include '../db_config.php';
                         $.ajax({
                             type: "POST", // type POST
                             data: formData,
-                            // dataType: 'json', // expecting json object in return
                             url: '../services/insertTransaction.php', // backend URL to search by name
                             // on success 
                             success: function(data) {
                                 alert(data);
+                                $('#transaction')[0].reset();
                             }
                         })
 

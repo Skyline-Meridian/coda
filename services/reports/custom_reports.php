@@ -3,6 +3,7 @@ include '../../db_config.php';
 
 $from = $_POST['start_date'];
 $to = $_POST['end_date'];
+
 $operator_field1 = $_POST['operator_field1'];
 $field1 = isset($_POST['field1'])?$_POST['field1']:'';
 $field_value1 = isset($_POST['field_value1'])?trim($_POST['field_value1']):'';
@@ -52,9 +53,9 @@ function customRecords($pdo, $post_data){
 
 
     
-    $query = "SELECT m.*, SUM(cd.tr_amount) AS amount FROM members AS m 
+    $query = "SELECT m.*, SUM(tr_amount) AS amount FROM members AS m 
                 INNER JOIN coda_data AS cd 
-                ON m.id = cd.member_id WHERE cd.tr_date BETWEEN CAST('".$post_data[1]."' AS DATE) AND CAST('".$post_data[0]."' AS DATE) $op1 $query_part1 $op2 $query_part2 $op3 $query_part3 $op4 $query_part4 Group By m.id";
+                ON m.id = cd.member_id WHERE cd.tr_date BETWEEN CAST('".$post_data[1]."' AS DATE) AND CAST('".$post_data[0]."' AS DATE) $op1 $query_part1 $op2 $query_part2 $op3 $query_part3 $op4 $query_part4 AND m.status = 1 Group By m.id";
 
     $members['query'] = $query;
 
@@ -65,6 +66,8 @@ function customRecords($pdo, $post_data){
             $members['members'][$j] = $row;
             $j++;
         }
+    } else {
+        $members['members'] = 0;
     }
     return json_encode($members);
 }

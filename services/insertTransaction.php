@@ -24,6 +24,27 @@ if (isset($_POST) && $_POST['member_id'] !== '' && $_POST['tr_date'] !== '' && $
         // Attempt to execute the prepared statement
         if ($stmt->execute()) {
             $coda_data_row_id = $pdo->lastInsertId();
+
+            // Update last payment and total payment in members table
+            $sql1 = "SELECT dervst, cumulvst FROM members WHERE id='".$member_id."'";
+            $result = $pdo->query($sql1);
+            $row = $result->fetch();
+            if ($row['dervst'] != '' && strtotime($row['dervst']) < strtotime($tr_date)){
+                $dervst = $tr_date;
+            } else $dervst = $row['dervst'];
+            $cumulvst=($row['cumulvst']+$tr_amount);
+
+            // prepare to update member table first
+        $sql2 = "UPDATE members SET cumulvst=:cumulvst, dervst=:dervst WHERE id=:member_id";
+        $stmt1 = $pdo->prepare($sql2);
+        $stmt1->bindParam(":member_id", $param_member_id);
+        $stmt1->bindParam(":cumulvst", $param_cumulvst);
+        $stmt1->bindParam(":dervst", $param_dervst);
+        $param_member_id = $member_id;
+        $param_cumulvst = $cumulvst;
+        $param_dervst = $dervst;
+        $stmt1->execute();
+
             echo "New transaction inserted at ".$coda_data_row_id;
         } else {
             echo "Error in inserting new transaction";
@@ -41,7 +62,7 @@ unset($pdo);
 
 
 
-} else echo json_encode("empty");
+} else echo json_encode("Tous les champs sont obligatoires");
 
 
 

@@ -1,16 +1,16 @@
 <?php
-/// Create connection
-// $servername = "ligueseptudonat.mysql.db";
-// $username = "ligueseptudonat";
-// $password = "SEPd0n421b";
-// $dbname="ligueseptudonat";
+session_start();
+/* Database credentials. */
+// define('DB_SERVER', 'ligueseptudonat.mysql.db');
+// define('DB_USERNAME', 'ligueseptudonat');
+// define('DB_PASSWORD', 'Douchka224');
+// define('DB_NAME', 'ligueseptudonat');
 
-
-/* Database credentials. Local server with default setting (user 'root' with no password) */
+/* Local server */
 define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
-define('DB_NAME', 'coda');
+define('DB_NAME', 'ligueseptudonat');
  
 /* Attempt to connect to MySQL database */
 try{

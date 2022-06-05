@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
+  // $baseurl = "https://coda.liguesep.be/"
   $baseurl = "http://localhost/coda/"
 ?>
 <head>
@@ -20,6 +21,7 @@
   <!-- End plugin css for this page -->
   <!-- inject:css -->
   <link rel="stylesheet" href="<?php echo $baseurl;?>css/vertical-layout-light/style.css">
+  <link rel="stylesheet" href="<?php echo $baseurl;?>css/mycss.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="<?php echo $baseurl;?>images/favicon.png" />
 </head>

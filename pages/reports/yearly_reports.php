@@ -1,6 +1,9 @@
 <?php
 include '../../header.php';
 include '../../db_config.php';
+if(!$_SESSION['id']){
+header('location:../login.php');
+}
 ?>
 <!-- Navbar -->
 <?php include '../../navbar.php'; ?>
@@ -15,8 +18,8 @@ include '../../db_config.php';
             <div class="col-md-12 grid-margin">
                 <div class="row">
                     <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                        <h3 class="font-weight-bold">Yearly Report</h3>
-                        <h6 class="font-weight-normal mb-0">Select the year from the dropdown to get complete report of all transactions done in that year.</h6>
+                        <h3 class="font-weight-bold">Rapport annuel</h3>
+                        <h6 class="font-weight-normal mb-0">Sélectionner l’année depuis le menu déroulant pour obtenir un rapport de toutes les transactions pour l’année sélectionner.</h6>
                     </div>
                     <div class="col-12 col-xl-4">
                         <div class="justify-content-end d-flex">

@@ -14,7 +14,7 @@ class TransactionPart3LineParserTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(true, $parser->canAcceptString($sample));
 
-        $result = $parser->parse($sample);
+        $result = $parser->parse($sample); 
 
 		$this->assertEquals(1, $result->getSequenceNumber()->getValue());
 		$this->assertEquals(0, $result->getSequenceNumberDetail()->getValue());

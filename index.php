@@ -1,6 +1,10 @@
 <?php
 include 'header.php';
 include 'db_config.php';
+session_start();
+if (!$_SESSION['auth']) {
+    header('location:pages/login.php');
+}
 ?>
 
 <style>
@@ -44,28 +48,28 @@ include 'db_config.php';
                         <div class="col-md-12 grid-margin">
                             <div class="row">
                                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                                    <h3 class="font-weight-bold">Bienvenue Michael</h3>
+                                    <h3 class="font-weight-bold">Bienvenue <?php echo $_SESSION['name']; ?></h3>
                                     <h6 class="font-weight-normal mb-0">Qu’aimeriez-vous faire aujourd’hui? Commencez par télécharger le fichier coda d’aujourd’hui.</h6>
                                 </div>
                                 <div class="col-12 col-xl-4">
                                     <div class="justify-content-end d-flex">
                                         <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
-                                        <select class="form-control form-control-sm" id="uploaded_coda" name="uploaded_coda">
-                                            <option selected disabled hidden>Select Coda File Date</option>
-                                            <?php
-                                            $sql = "SELECT MIN(coda_filename) AS filename, coda_date FROM coda_data Group By coda_date";
-                                            if ($result = $pdo->query($sql)) {
-                                                if ($result->rowCount() > 0) {
-                                                    while ($row = $result->fetch()) {
-                                                        if($row["filename"]){
-                                                            echo '<option class="dropdown-item select-coda-file-date" value="' . $row["filename"] . '">' . $row["coda_date"] . '</option>';
-                                                        }                                                        
-                                                    }
-                                                } else echo '<option class="dropdown-item select-coda-file-date" value="">No Data Found</option>';
-                                            }
-                                            ?>
+                                            <select class="form-control form-control-sm" id="uploaded_coda" name="uploaded_coda">
+                                                <option selected disabled hidden>Select Coda File Date</option>
+                                                <?php
+                                                $sql = "SELECT MIN(coda_filename) AS filename, coda_date, sequence_number FROM coda_data Group By coda_date";
+                                                if ($result = $pdo->query($sql)) {
+                                                    if ($result->rowCount() > 0) {
+                                                        while ($row = $result->fetch()) {
+                                                            if ($row["filename"]) {
+                                                                echo '<option class="dropdown-item select-coda-file-date" value="' . $row["filename"] . '">' . date('d-m-Y', strtotime($row["coda_date"])) . ' | Sq.N° ' . $row["sequence_number"] . '</option>';
+                                                            }
+                                                        }
+                                                    } else echo '<option class="dropdown-item select-coda-file-date" value="">No Data Found</option>';
+                                                }
+                                                ?>
 
-                                        </select>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -157,7 +161,7 @@ include 'db_config.php';
                                                     <th width="10%">Date</th>
                                                     <th width="5%">Devise</th>
                                                     <th width="10%">Montant</th>
-                                                    <th width="25%">Added</th>
+                                                    <th width="25%">Message</th>
                                                 </tr>
                                             </thead>
                                         </table>
@@ -171,4 +175,3 @@ include 'db_config.php';
                 <!-- content-wrapper ends -->
 
                 <?php include 'footer.php'; ?>
-

@@ -90,7 +90,7 @@ class LinesParser implements ParserInterface
 	 * @param string $codaFile Filepath
 	 * @return string[]
 	 */
-	private function fileToCodaLines(string $codaFile): array
+	public function fileToCodaLines(string $codaFile): array
 	{
 		return array_map(
 			function($line) {

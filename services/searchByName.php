@@ -6,7 +6,7 @@ $name = $_POST['name'];
 $i = 0;
 
 if($name){
-    $sql = "SELECT * FROM `members` WHERE `intitule` LIKE '%".$name."%'";
+    $sql = "SELECT * FROM `members` WHERE `intitule` LIKE '%".$name."%' AND status=1";
     // $sql = "SELECT * FROM members where intitule like '%".$name."%' order by intitule";
     if($result = $pdo->query($sql)){
         if($result->rowCount() > 0){

@@ -24,7 +24,10 @@
   <script src="<?php echo $baseurl;?>vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
   <script src="<?php echo $baseurl;?>vendors/moment/moment.min.js"></script>
   <script src="<?php echo $baseurl;?>js/dataTables.select.min.js"></script>
-
+  <script type="text/javascript" src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script>
+  <script src="<?php echo $baseurl;?>vendors/moment/datetime-moment.js"></script>
+  <!-- <script src="https://momentjs.com/downloads/moment.min.js"></script> -->
+  <!-- <script src="https://cdn.datatables.net/plug-ins/1.10.13/sorting/datetime-moment.js"></script> -->
   <!-- End plugin js for this page -->
   <!-- inject:js -->
   <script src="<?php echo $baseurl;?>js/off-canvas.js"></script>

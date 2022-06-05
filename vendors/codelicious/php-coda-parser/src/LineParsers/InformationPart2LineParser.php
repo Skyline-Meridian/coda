@@ -6,6 +6,7 @@ use Codelicious\Coda\Lines\InformationPart2Line;
 use Codelicious\Coda\Values\Message;
 use Codelicious\Coda\Values\SequenceNumber;
 use Codelicious\Coda\Values\SequenceNumberDetail;
+use Codelicious\Coda\Values\Address;
 
 /**
  * @package Codelicious\Coda
@@ -23,7 +24,8 @@ class InformationPart2LineParser implements LineParserInterface
 		return new InformationPart2Line(
 			new SequenceNumber(mb_substr($codaLine, 2, 4)),
 			new SequenceNumberDetail(mb_substr($codaLine, 6, 4)),
-			new Message(mb_substr($codaLine, 10, 105))
+			new Message(mb_substr($codaLine, 10, 105)),
+			new Address(mb_substr($codaLine, 10, 35))
 		);
 	}
 

@@ -76,6 +76,11 @@ if ( isset($_FILES['file']['name']) || isset($_POST['file'])) {
                 $coda_transactions[$k]['stmt_sq'] = $transaction->getStatementSequence();
                 $coda_transactions[$k]['trns_sq'] = $transaction->getTransactionSequence();
                 $coda_transactions[$k]['msg'] = $transaction->getMessage();
+                $arrAddress = explode(' ',$transaction->getAddress());
+                $coda_transactions[$k]['ville'] = array_pop($arrAddress);
+                $coda_transactions[$k]['cp'] = array_pop($arrAddress);
+                $coda_transactions[$k]['address'] = trim(implode(" ",$arrAddress));
+                
             }
             // transfer all coda transactions into coda response variable
             $coda_response['transaction'] = $coda_transactions;

@@ -19,7 +19,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
               
-              <a class="dropdown-item" href="login.php">
+              <a class="dropdown-item" href="<?php echo $baseurl;?>pages/logout.php">
                 <i class="ti-power-off text-primary"></i>
                 Logout
               </a>

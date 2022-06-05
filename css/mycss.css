@@ -1,0 +1,8 @@
+.view, .edit, .del{
+    padding: 5px;
+    font-size: 14px;
+}
+.toggle-vis{
+    margin: 5px;
+    height: 12px;
+}

@@ -2,6 +2,7 @@
 
 namespace Codelicious\Coda\Lines;
 
+use Codelicious\Coda\Values\Address;
 use Codelicious\Coda\Values\Message;
 use Codelicious\Coda\Values\SequenceNumber;
 use Codelicious\Coda\Values\SequenceNumberDetail;
@@ -19,15 +20,18 @@ class InformationPart2Line implements LineInterface
 	private $sequenceNumberDetail;
 	/** @var Message */
 	private $message;
+	private $address = [];
 	
 	public function __construct(
 		SequenceNumber $sequenceNumber,
 		SequenceNumberDetail $sequenceNumberDetail,
-		Message $message )
+		Message $message,
+		Address $address )
 	{
 		$this->sequenceNumber = $sequenceNumber;
 		$this->sequenceNumberDetail = $sequenceNumberDetail;
 		$this->message = $message;
+		$this->address = $address;
 	}
 	
 	public function getType(): LineType
@@ -48,5 +52,10 @@ class InformationPart2Line implements LineInterface
 	public function getMessage(): Message
 	{
 		return $this->message;
+	}
+	
+	public function getAddress(): Address
+	{
+		return $this->address;
 	}
 }

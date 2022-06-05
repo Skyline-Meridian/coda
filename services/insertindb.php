@@ -7,7 +7,10 @@ $transaction = $_POST['transaction'];
 
 // these are for coda table - Basic common info
 $coda_filename = trim($_POST['filename']);
-$coda_date = trim($transaction['date']);
+$str=explode('-', $transaction['date']);
+$strdate=$str[2].'-'.$str[1].'-'.$str[0];
+$coda_date =date("Y-m-d",strtotime($strdate));
+
 $timezone = trim($transaction['timezone']);
 $account_name = trim($transaction['account_name']);
 $bic = trim($transaction['bic']);
@@ -22,7 +25,7 @@ $info_msg = trim($transaction['info_msg']);
 
 //actual transaction info for this member
 $tr_bic = trim($transaction['tr']['bic']);
-$tr_date = trim($transaction['tr']['date']);
+$tr_date =date('Y-m-d',strtotime($transaction['tr']['date']));
 $tr_currency = trim($transaction['tr']['currency']);
 $tr_amount = trim($transaction['tr']['amount']);
 $tr_stmt_sq_no = trim($transaction['tr']['stmt_sq']);
@@ -36,16 +39,20 @@ $titre = (isset($_POST["titre"]))?trim($_POST["titre"]):'';
 $divers = (isset($_POST["divers"]))?trim($_POST["divers"]):'';
 $addresse = (isset($_POST["addresse"]))?trim($_POST["addresse"]):'';
 $communication = trim($_POST["communication"]);
+$numero_enterprise = trim($_POST["numero_enterprise"]);
 $cp = (isset($_POST["cp"]))?trim($_POST["cp"]):'';
-$newsletter = trim($_POST["newsletter"]);
+// $newsletter = trim($_POST["newsletter"]);
 $localite = (isset($_POST["localite"]))?trim($_POST["localite"]):'';
-$rubans = trim($_POST["rubans"]);
+// $rubans = trim($_POST["rubans"]);
 $remarks = trim($_POST["remarks"]);
 $naissance = (isset($_POST["naissance"]))?trim($_POST["naissance"]):'';
 $email = (isset($_POST["email"]))?trim($_POST["email"]):'';
 $telephone = (isset($_POST["telephone"]))?trim($_POST["telephone"]):'';
 $dervst = (isset($_POST["dervst"]))?trim($_POST["dervst"]):'';
-$cumulvst = (isset($_POST["cumulvst"]))?trim($_POST["cumulvst"]):'';
+$cumulvst = (isset($_POST["cumulvst"]))?trim($_POST["cumulvst"]):$tr_amount;
+$monant = (isset($_POST["monant"]))?trim($_POST["monant"]):'';
+$tr_amount=($tr_amount-$monant);
+// $cumulvst=($cumulvst);
 
 
 // check if atleast name and number is not empty
@@ -59,7 +66,7 @@ if (!empty($name) && !empty($number)) {
     //         if($stmt->rowCount() == 0){
 
     // Prepare an insert statement - intitule is name
-    $sql1 = "INSERT INTO members (intitule, accno, diver, titre, addresse, cp, localite, email, naissance, tele, communication, rubans, newsletter, dervst, cumulvst) VALUES (:intitule, :accno, :diver, :titre, :addresse, :cp, :localite, :email, :naissance, :tele, :communication, :rubans, :newsletter, :dervst, :cumulvst)";
+    $sql1 = "INSERT INTO members (intitule, accno, diver, titre, addresse, cp, localite, email, naissance, tele, communication, numero_enterprise, dervst, cumulvst) VALUES (:intitule, :accno, :diver, :titre, :addresse, :cp, :localite, :email, :naissance, :tele, :communication, :numero_enterprise, :dervst, :cumulvst)";
 
     if ($stmt1 = $pdo->prepare($sql1)) {
         // Bind variables to the prepared statement as parameters
@@ -74,8 +81,7 @@ if (!empty($name) && !empty($number)) {
         $stmt1->bindParam(":email", $param_email);
         $stmt1->bindParam(":tele", $param_tele);
         $stmt1->bindParam(":communication", $param_communication);
-        $stmt1->bindParam(":rubans", $param_rubans);
-        $stmt1->bindParam(":newsletter", $param_newsletter);
+        $stmt1->bindParam(":numero_enterprise", $param_numero_enterprise);
         $stmt1->bindParam(":dervst", $param_dervst);
         $stmt1->bindParam(":cumulvst", $param_cumulvst);
 
@@ -91,8 +97,7 @@ if (!empty($name) && !empty($number)) {
         $param_email = $email;
         $param_tele = $telephone;
         $param_communication = $communication;
-        $param_rubans = $rubans;
-        $param_newsletter = $newsletter;
+        $param_numero_enterprise = $numero_enterprise;
         $param_dervst = $dervst;
         $param_cumulvst = $cumulvst;
 
@@ -107,10 +112,10 @@ if (!empty($name) && !empty($number)) {
             if ($result->rowCount() == 0) {
 
                 // Prepare an insert statement for transaction data
-                $coda_data_fields = ['coda_filename', 'coda_date', 'timezone', 'account_name', 'sequence_number', 'bic', 'cin', 'account_number', 'currency_code', 'country_code', 'intial_bal', 'new_bal', 'info_msg', 'member_id', 'tr_bic', 'tr_date', 'tr_currency', 'tr_amount', 'tr_sequence', 'tr_msg', 'remarks'];
+                $coda_data_fields = ['coda_filename', 'coda_date', 'timezone', 'account_name', 'sequence_number', 'bic', 'cin', 'account_number', 'currency_code', 'country_code', 'intial_bal', 'new_bal', 'info_msg', 'member_id', 'tr_bic', 'tr_date', 'tr_currency', 'tr_amount', 'monant', 'tr_sequence', 'tr_msg', 'remarks'];
 
                 // prepare to insert new transaction in coda_data table
-                $sql2 = "INSERT INTO coda_data (coda_filename, coda_date, timezone, account_name, sequence_number, bic, cin, account_number, currency_code, country_code, intial_bal, new_bal, info_msg, member_id, tr_bic, tr_date, tr_currency, tr_amount, tr_sequence, tr_msg, remarks) VALUES (:coda_filename, :coda_date, :timezone, :account_name, :sequence_number, :bic, :cin, :account_number, :currency_code, :country_code, :intial_bal, :new_bal, :info_msg, :member_id, :tr_bic, :tr_date, :tr_currency, :tr_amount, :tr_sequence, :tr_msg, :remarks)";
+                $sql2 = "INSERT INTO coda_data (coda_filename, coda_date, timezone, account_name, sequence_number, bic, cin, account_number, currency_code, country_code, intial_bal, new_bal, info_msg, member_id, tr_bic, tr_date, tr_currency, tr_amount, monant, tr_sequence, tr_msg, remarks) VALUES (:coda_filename, :coda_date, :timezone, :account_name, :sequence_number, :bic, :cin, :account_number, :currency_code, :country_code, :intial_bal, :new_bal, :info_msg, :member_id, :tr_bic, :tr_date, :tr_currency, :tr_amount, :monant, :tr_sequence, :tr_msg, :remarks)";
 
                 if ($stmt2 = $pdo->prepare($sql2)) {
                     // Bind variables to the prepared statement as parameters

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 26, 2021 at 09:47 PM
--- Server version: 10.4.20-MariaDB
--- PHP Version: 8.0.9
+-- Generation Time: Nov 11, 2021 at 10:38 PM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 7.3.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -84,6 +84,7 @@ CREATE TABLE `coda_data` (
   `tr_date` date DEFAULT NULL,
   `tr_currency` varchar(255) DEFAULT NULL,
   `tr_amount` double DEFAULT NULL,
+  `monant` double NOT NULL,
   `tr_sequence` int(50) NOT NULL,
   `tr_msg` text DEFAULT NULL,
   `remarks` text NOT NULL,
@@ -97,12 +98,35 @@ CREATE TABLE `coda_data` (
 -- Dumping data for table `coda_data`
 --
 
-INSERT INTO `coda_data` (`id`, `coda_filename`, `coda_date`, `timezone_type`, `timezone`, `account_name`, `sequence_number`, `bic`, `cin`, `account_number`, `currency_code`, `country_code`, `intial_bal`, `new_bal`, `info_msg`, `member_id`, `tr_bic`, `tr_date`, `tr_currency`, `tr_amount`, `tr_sequence`, `tr_msg`, `remarks`, `valuta_date`, `sepadirectdebit`, `uploaded_at`, `status`) VALUES
-(10, '', NULL, NULL, NULL, 'Comité Luxembourg-général', 0, 'GEBABEBB', 424264043, 'BE27001709215273', NULL, NULL, NULL, NULL, NULL, 3808, NULL, '2021-10-09', 'EUR', 50, 0, NULL, 'New Tr', NULL, '', '0000-00-00', '1'),
-(11, 'BNP_Paribas_FortisCDA20210805_211327_224_21217COD100643_290929674.COD', '2021-05-08', NULL, 'Europe/Berlin', 'L.B.SCLER.PL.ASBL/S.CENTR', 171, 'GEBABEBB', 424264043, '250013850069', 'EUR', 'BE', 120556.71, 123230.21, '', 3807, 'GEBABEBB', '2021-05-08', 'EUR', 30, 12, 'EN SOUVENIR DE PATRICK GILLARDIN', '', NULL, '', '0000-00-00', '1'),
-(12, 'BNP_Paribas_FortisCDA20210805_211327_224_21217COD100643_290929674.COD', '2021-05-08', NULL, 'Europe/Berlin', 'L.B.SCLER.PL.ASBL/S.CENTR', 171, 'GEBABEBB', 424264043, '250013850069', 'EUR', 'BE', 120556.71, 123230.21, '', 3810, 'KEYTBEBB', '2021-05-08', 'EUR', 50, 8, 'EN SOUVENIR DE PATRICK GILLARDIN', 'New Add', NULL, '', '0000-00-00', '1'),
-(13, 'BNP_Paribas_FortisCDA20210805_211327_224_21217COD100643_290929674.COD', '2021-05-08', NULL, 'Europe/Berlin', 'L.B.SCLER.PL.ASBL/S.CENTR', 171, 'GEBABEBB', 424264043, '250013850069', 'EUR', 'BE', 120556.71, 123230.21, '', 3811, 'NICABEBB', '2021-05-08', 'EUR', 50, 6, 'EN SOUVENIR DE PATRICK GILLARDIN', '', NULL, '', '0000-00-00', '1'),
-(14, 'BNP_Paribas_FortisCDA20210503_213315_868_21123COD583949_277041683.COD', '2021-03-05', NULL, 'Europe/Berlin', 'L.B.SCLER.PL.ASBL/S.CENTR', 93, 'GEBABEBB', 424264043, '250013850069', 'EUR', 'BE', 98845.27, 99611.77, '', 3812, 'GKCCBEBB', '2021-03-05', 'EUR', 100, 1, 'PROJET2021 83061', '', NULL, '', '0000-00-00', '1');
+INSERT INTO `coda_data` (`id`, `coda_filename`, `coda_date`, `timezone_type`, `timezone`, `account_name`, `sequence_number`, `bic`, `cin`, `account_number`, `currency_code`, `country_code`, `intial_bal`, `new_bal`, `info_msg`, `member_id`, `tr_bic`, `tr_date`, `tr_currency`, `tr_amount`, `monant`, `tr_sequence`, `tr_msg`, `remarks`, `valuta_date`, `sepadirectdebit`, `uploaded_at`, `status`) VALUES
+(10, '', NULL, NULL, NULL, 'Comité Luxembourg-général', 0, 'GEBABEBB', 424264043, 'BE27001709215273', NULL, NULL, NULL, NULL, NULL, 3808, NULL, '2021-10-09', 'EUR', 50, 0, 0, NULL, 'New Tr', NULL, '', '0000-00-00', '1'),
+(11, 'BNP_Paribas_FortisCDA20210805_211327_224_21217COD100643_290929674.COD', '2021-05-08', NULL, 'Europe/Berlin', 'L.B.SCLER.PL.ASBL/S.CENTR', 171, 'GEBABEBB', 424264043, '250013850069', 'EUR', 'BE', 120556.71, 123230.21, '', 3807, 'GEBABEBB', '2021-05-08', 'EUR', 30, 0, 12, 'EN SOUVENIR DE PATRICK GILLARDIN', '', NULL, '', '0000-00-00', '1'),
+(13, 'BNP_Paribas_FortisCDA20210805_211327_224_21217COD100643_290929674.COD', '2021-05-08', NULL, 'Europe/Berlin', 'L.B.SCLER.PL.ASBL/S.CENTR', 171, 'GEBABEBB', 424264043, '250013850069', 'EUR', 'BE', 120556.71, 123230.21, '', 3811, 'NICABEBB', '2021-05-08', 'EUR', 50, 0, 6, 'EN SOUVENIR DE PATRICK GILLARDIN', '', NULL, '', '0000-00-00', '1'),
+(42, 'BNP_Paribas_FortisCDA20210805_211327_224_21217COD100643_290929674.COD', '2021-08-05', NULL, 'Europe/Berlin', 'L.B.SCLER.PL.ASBL/S.CENTR', 171, 'GEBABEBB', 424264043, '250013850069', 'EUR', 'BE', 120556.71, 123230.21, '', 3810, 'KEYTBEBB', '2021-08-05', 'EUR', 50, 0, 8, 'EN SOUVENIR DE PATRICK GILLARDIN', '', NULL, '', '0000-00-00', '1'),
+(43, '', NULL, NULL, NULL, 'Comité Namur-Chococlef', 0, 'GEBABEBB', 424264043, 'BE04250007201731', NULL, NULL, NULL, NULL, NULL, 6, NULL, '2021-10-27', 'EUR', 23, 0, 0, NULL, 'test', NULL, '', '0000-00-00', '1'),
+(44, 'BNP_Paribas_FortisCDA20210805_211327_224_21217COD100643_290929674.COD', '2021-08-05', NULL, 'Europe/Berlin', 'L.B.SCLER.PL.ASBL/S.CENTR', 171, 'GEBABEBB', 424264043, '250013850069', 'EUR', 'BE', 120556.71, 123230.21, '', 3813, 'GEBABEBB', '2021-08-05', 'EUR', 100, 0, 2, 'EN SOUVENIR DE PATRICK GILLARDIN', '', NULL, '', '0000-00-00', '1'),
+(45, 'BNP_Paribas_FortisCDA20210805_211327_224_21217COD100643_290929674.COD', '2021-08-05', NULL, 'Europe/Berlin', 'L.B.SCLER.PL.ASBL/S.CENTR', 171, 'GEBABEBB', 424264043, '250013850069', 'EUR', 'BE', 120556.71, 123230.21, '', 3820, 'GEBABEBB', '2021-08-05', 'EUR', 6, 0, 18, 'DON', '', NULL, '', '0000-00-00', '1'),
+(46, 'BNP_Paribas_FortisCDA20210805_211327_224_21217COD100643_290929674.COD', '2021-08-05', NULL, 'Europe/Berlin', 'L.B.SCLER.PL.ASBL/S.CENTR', 171, 'GEBABEBB', 424264043, '250013850069', 'EUR', 'BE', 120556.71, 123230.21, '', 3818, 'GKCCBEBB', '2021-08-05', 'EUR', 1950, 50, 1, 'GRANDE TOMBOLA GOLDEN PALACE HORNUDU 30/07/2021', '', NULL, '', '0000-00-00', '1'),
+(53, '', NULL, NULL, NULL, 'Comité Namur-Chococlef', 0, 'GEBABEBB', 424264043, 'BE04250007201731', NULL, NULL, NULL, NULL, NULL, 18, NULL, '2021-10-28', 'EUR', 30, 0, 0, NULL, 'test', NULL, '', '0000-00-00', '1'),
+(54, '', NULL, NULL, NULL, 'Comité Luxembourg-général', 0, 'GEBABEBB', 424264043, 'BE27001709215273', NULL, NULL, NULL, NULL, NULL, 18, NULL, '2021-10-28', 'EUR', 20, 0, 0, NULL, 'test1', NULL, '', '0000-00-00', '1'),
+(55, 'BNP_Paribas_FortisCDA20210805_211327_224_21217COD100643_290929674.COD', '2021-08-05', NULL, 'Europe/Berlin', 'L.B.SCLER.PL.ASBL/S.CENTR', 171, 'GEBABEBB', 424264043, '250013850069', 'EUR', 'BE', 120556.71, 123230.21, '', 18, 'CTBKBEBX', '2021-08-05', 'EUR', 10, 20, 13, 'EN SOUVENIR DE PATRICK GILLARDIN', '', NULL, '', '0000-00-00', '1'),
+(56, '', NULL, NULL, NULL, 'Comité Namur-Chococlef', 0, 'GEBABEBB', 424264043, 'BE04250007201731', NULL, NULL, NULL, NULL, NULL, 3803, NULL, '1988-01-12', 'EUR', 120, 0, 0, NULL, '1st entry', NULL, '', '0000-00-00', '1'),
+(57, 'BNP_Paribas_FortisCDA20210131_195325_665_21031COD226178_264256182.COD', '2021-01-31', NULL, 'Europe/Berlin', 'L.B.SCLER.PL.ASBL/S.CENTR', 20, 'GEBABEBB', 424264043, '250013850069', 'EUR', 'BE', 138334.22, 138344.22, '', 2116, 'GEBABEBB', '2021-01-31', 'EUR', 5, 0, 1, '1802 115218', '', NULL, '', '0000-00-00', '1'),
+(58, 'BNP_Paribas_FortisCDA20210211_205730_089_21042COD667391_265901636.COD', '2021-02-11', NULL, 'Europe/Berlin', 'L.B.SCLER.PL.ASBL/S.CENTR', 31, 'GEBABEBB', 424264043, '250013850069', 'EUR', 'BE', 139027.22, 139092.22, '', 3830, 'GKCCBEBB', '2021-02-11', 'EUR', 10, 0, 2, 'DON', '', NULL, '', '0000-00-00', '1'),
+(59, 'BNP_Paribas_FortisCDA20210103_195142_288_21003COD190191_260312723.COD', '2021-01-03', NULL, 'Europe/Berlin', 'L.B.SCLER.PL.ASBL/S.CENTR', 2, 'GEBABEBB', 424264043, '250013850069', 'EUR', 'BE', 137052.73, 137102.73, '', 1622, 'BBRUBEBBXXX', '2021-01-03', 'EUR', 40, 10, 1, 'DON 2021', '', NULL, '', '0000-00-00', '1'),
+(60, '', NULL, NULL, NULL, 'Comité Namur-Chococlef', 0, 'GEBABEBB', 424264043, 'BE04250007201731', NULL, NULL, NULL, NULL, NULL, 3831, NULL, '2021-10-22', 'EUR', 50, 0, 0, NULL, '50 added', NULL, '', '0000-00-00', '1'),
+(61, '', NULL, NULL, NULL, 'Comité Bruxelles-Chococlef', 0, 'GEBABEBB', 424264043, 'BE29001318090964', NULL, NULL, NULL, NULL, NULL, 3831, NULL, '1988-10-15', 'EUR', 100, 0, 0, NULL, '100', NULL, '', '0000-00-00', '1'),
+(62, 'BNP_Paribas_FortisCDA20210119_205713_000_21019COD811177_262618834.COD', '2021-01-19', NULL, 'Europe/Berlin', 'L.B.SCLER.PL.ASBL/S.CENTR', 13, 'GEBABEBB', 424264043, '250013850069', 'EUR', 'BE', 138030.47, 138064.47, '', 3832, 'GKCCBEBB', '2021-01-19', 'EUR', 24, 0, 1, '2 BOULES NOEL GALLER', '', NULL, '', '0000-00-00', '1'),
+(63, 'BNP_Paribas_FortisCDA20210131_195325_665_21031COD226178_264256182.COD', '2021-01-31', NULL, 'Europe/Berlin', 'L.B.SCLER.PL.ASBL/S.CENTR', 20, 'GEBABEBB', 424264043, '250013850069', 'EUR', 'BE', 138334.22, 138344.22, '', 932, 'GEBABEBB', '2021-01-31', 'EUR', 5, 0, 2, '118113682 AVENUE VAN SEVER 74                1970 WEZEMBEEK-OPPEM', 'find me', NULL, '', '0000-00-00', '1'),
+(64, 'BNP_Paribas_FortisCDA20210805_211327_224_21217COD100643_290929674.COD', '2021-08-05', NULL, 'Europe/Berlin', 'L.B.SCLER.PL.ASBL/S.CENTR', 171, 'GEBABEBB', 424264043, '250013850069', 'EUR', 'BE', 120556.71, 123230.21, '', 3816, 'BBRUBEBB', '2021-08-05', 'EUR', 3, 2, 19, 'CHAMPS MORAIS 83                   6880 BERTRIX', 'retry', NULL, '', '0000-00-00', '1'),
+(65, 'BNP_Paribas_FortisCDA20210805_211327_224_21217COD100643_290929674.COD', '2021-08-05', NULL, 'Europe/Berlin', 'L.B.SCLER.PL.ASBL/S.CENTR', 171, 'GEBABEBB', 424264043, '250013850069', 'EUR', 'BE', 120556.71, 123230.21, '', 3821, 'BBRUBEBB', '2021-08-05', 'EUR', 30, 20, 3, 'EN SOUVENIR DE PATRICK GILLARDIN', 'retry', NULL, '', '0000-00-00', '1'),
+(66, 'BNP_Paribas_FortisCDA20210805_211327_224_21217COD100643_290929674.COD', '2021-08-05', NULL, 'Europe/Berlin', 'L.B.SCLER.PL.ASBL/S.CENTR', 171, 'GEBABEBB', 424264043, '250013850069', 'EUR', 'BE', 120556.71, 123230.21, '', 3815, 'BBRUBEBBXXX', '2021-08-05', 'EUR', 10, 10, 16, 'EN SOUVENIR DE PATRICK GILLARDIN', 'new', NULL, '', '0000-00-00', '1'),
+(67, 'BNP_Paribas_FortisCDA20210805_211327_224_21217COD100643_290929674.COD', '2021-08-05', NULL, 'Europe/Berlin', 'L.B.SCLER.PL.ASBL/S.CENTR', 171, 'GEBABEBB', 424264043, '250013850069', 'EUR', 'BE', 120556.71, 123230.21, '', 3824, 'GEBABEBB', '2021-08-05', 'EUR', 5, 25, 11, 'EN SOUVENIR DE PATRICK GILLARDIN', 'yes', NULL, '', '0000-00-00', '1'),
+(68, 'BNP_Paribas_FortisCDA20210805_211327_224_21217COD100643_290929674.COD', '2021-08-05', NULL, 'Europe/Berlin', 'L.B.SCLER.PL.ASBL/S.CENTR', 171, 'GEBABEBB', 424264043, '250013850069', 'EUR', 'BE', 120556.71, 123230.21, '', 3819, 'BBRUBEBBXXX', '2021-08-05', 'EUR', 5, 20, 14, 'EN SOUVENIR DE PATRICK GILLARDIN', 'agaib', NULL, '', '0000-00-00', '1'),
+(69, 'BNP_Paribas_FortisCDA20210805_211327_224_21217COD100643_290929674.COD', '2021-08-05', NULL, 'Europe/Berlin', 'L.B.SCLER.PL.ASBL/S.CENTR', 171, 'GEBABEBB', 424264043, '250013850069', 'EUR', 'BE', 120556.71, 123230.21, '', 3826, 'GKCCBEBB', '2021-08-05', 'EUR', 25, 15, 10, 'EN SOUVENIR DE PATRICK GILLARDIN', '', NULL, '', '0000-00-00', '1'),
+(70, 'BNP_Paribas_FortisCDA20210503_213315_868_21123COD583949_277041683.COD', '2021-05-03', NULL, 'Europe/Berlin', 'L.B.SCLER.PL.ASBL/S.CENTR', 93, 'GEBABEBB', 424264043, '250013850069', 'EUR', 'BE', 98845.27, 99611.77, '', 3812, 'GKCCBEBB', '2021-05-03', 'EUR', 100, 0, 1, 'PROJET2021 83061', '', NULL, '', '0000-00-00', '1'),
+(71, 'BNP_Paribas_FortisCDA20210806_210936_112_21218COD148078_291139045.COD', '2021-08-06', NULL, 'Europe/Berlin', 'L.B.SCLER.PL.ASBL/S.CENTR', 172, 'GEBABEBB', 424264043, '250013850069', 'EUR', 'BE', 123230.21, 124174.21, '', 295, 'BPOTBEB1', '2021-08-06', 'EUR', 5, 0, 13, 'DON', '', NULL, '', '0000-00-00', '1'),
+(72, '', NULL, NULL, NULL, 'Comité Liège', 0, 'GEBABEBB', 424264043, 'BE53240039610053', NULL, NULL, NULL, NULL, NULL, 3833, NULL, '2021-11-18', 'EUR', 10, 0, 0, NULL, 'retry', NULL, '', '0000-00-00', '1');
 
 -- --------------------------------------------------------
 
@@ -161,7 +185,7 @@ INSERT INTO `members` (`id`, `intitule`, `accno`, `diver`, `titre`, `addresse`, 
 (3, 'RUELLE SERGE', NULL, '', 'M.', 'Rue de la Bruyère 106', '4400', 'FLEMALLE', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (4, 'ALTDORF SIMONE', NULL, '', 'MME', 'Rue Kertenne 34', '4432', 'ALLEUR', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (5, 'MEUNIER BERRAOUI J-J', NULL, '', 'M./Mme', 'RUE AS-POIS 6/14', '7500', 'TOURNAI', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
-(6, 'ROSSIGNOL FREDDY', NULL, '', 'M', 'RUE DE BAVAY 124', '7040', 'GENLY', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
+(6, 'ROSSIGNOL FREDDY', NULL, '', 'M', 'RUE DE BAVAY 124', '7040', 'GENLY', '', '0000-00-00', '', '', '', 'asd | ', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (7, 'DELLA FAILLE GODELIEVE', NULL, '', 'Mme', 'RUE DE LA BEOLE 52', '4050', 'CHAUDFONTAINE', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (8, 'GRISARD JEAN', NULL, '', 'M.', 'RUE DE LA BEOLE 52', '4050', 'CHAUDFONTAINE', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (9, 'SOENEN MICHELINE', NULL, '', 'Mlle', 'av. G.E. Lebon 109/3', '1160', 'BRUXELLES', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
@@ -173,7 +197,7 @@ INSERT INTO `members` (`id`, `intitule`, `accno`, `diver`, `titre`, `addresse`, 
 (15, 'VANOEYEN HENRI', NULL, '', 'M.', 'Rue KAREL BOGAERT 5', '1020', 'BRUXELLES', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (16, 'BEDORET ANDRE', NULL, '', 'M.', 'Av. DE LA RESERVE 13', '1640', 'RHODE-S-GENESE', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (17, 'BILQUIN MICHEL', NULL, '', 'M.', 'RUE DU GRAND CORTIL 7', '1331', 'ROSIERES', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
-(18, 'LIFSCHITZ LIDA', NULL, '', 'Mme', 'AVENUE DE L\'HIVER 11', '1410', 'WATERLOO', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
+(18, 'M CYRIL HUBERT OU MME ELISE LEJE', 'BE43109666095201', '', 'Mme', 'AVENUE DE L\'HIVER 11', '1410', 'WATERLOO', '', '0000-00-00', '', '', '', '', '', '', '', '2021-08-05', 70, '1', NULL, NULL, NULL, NULL),
 (19, 'DESAGHER MARIE H', NULL, '', 'Mlle', 'RUE DE CHAMPLES 8 CH 209', '1301', 'BIERGES', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (20, 'RICKER JULIETTE', NULL, '', 'Mme', 'pl. DE PERONNES 17', '7134', 'PERONNES-BINCHE', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (21, 'KAECKENBEECK ALBERT', NULL, '', 'M.', 'AVENUE JEAN SIBELIUS, 63', '1070', 'BRUXELLES', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
@@ -419,7 +443,7 @@ INSERT INTO `members` (`id`, `intitule`, `accno`, `diver`, `titre`, `addresse`, 
 (261, 'SCHREVENS BRIGITTE', NULL, '', 'Mlle', 'Rue du Portugal 9', '7034', 'MONS OBOURG', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (262, 'SERET RENE', NULL, '', 'M.', 'RUE CHARLES YERNAUX 7', '7100', 'LA LOUVIERE', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (263, 'SERVAIS ERIC', NULL, '', 'M.', 'MONT-ROUTE TROS MARETS 27', '4960', 'MALMEDY', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
-(264, 'SOEURS DE LA CHARITE', NULL, '', '', 'Rue du Belvédère 75', '5000', 'NAMUR', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
+(264, 'SOEURS DE LA CHARITE', '', '', '', 'Rue du Belvédère 75', '5000', 'NAMUR', '', '2021-10-09', '', '', '', '', '', '', '', '0000-00-00', 0, '1', NULL, NULL, NULL, NULL),
 (265, 'VAN HUELE CATHERINE', NULL, '', 'Mme', 'Rue de l\'Eglise 29', '5340', 'GESVES', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (266, 'TASSET JEAN-MARC', NULL, '', 'M.', 'Rue de Betissart 17C', '7802', 'ORMEIGNIES', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (267, 'THIBOU LILIANE', NULL, '', 'Mme', 'AVE EMILE DIGNEFFE 13/41', '4000', 'LIEGE', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
@@ -451,7 +475,7 @@ INSERT INTO `members` (`id`, `intitule`, `accno`, `diver`, `titre`, `addresse`, 
 (292, 'BOUCHER Marcel', NULL, '', 'M.', 'Rue du Bois-des-Broux 21', '5080', 'LA BRUYERE', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (293, 'VAN DE PUT BERNADETTE', NULL, '', 'Mme', 'Av. Château de Walzin 9/2', '1180', 'BRUXELLES', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (294, 'BEFF ROGER', NULL, '', 'Abbé', 'Rue de la Cateleine, 16A', '6810', 'JAMOIGNE', '', '0000-00-00', '061/411031', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
-(295, 'ALMER Rudolf', NULL, '', 'M.', 'Rue Tout-Va-Bien 98', '4420', 'ST NICOLAS', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
+(295, 'ALMER RUDOLF', 'BE07000126572266', '', 'M.', 'RUE TOUT VA BIEN, 98', '4420', 'SAINT-NICOLAS', '', '0000-00-00', '', '', '', '2021 | ABC | 295', '', '', '', '2021-08-06', 5, '1', NULL, NULL, NULL, NULL),
 (296, 'ANTOINE ODETTE', NULL, '', 'Mme', 'Av. DES ORANGERS 58', '1150', 'BRUXELLES', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (297, 'APRUZZESE ANNA', NULL, '', 'Mme', 'bld d\'Avroy 24/71', '4000', 'LIEGE', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (298, 'BAGHDIKIAN SONIA', NULL, '', 'Mme', 'SCHILDPADSTRAAT 30', '1850', 'GRIMBERGEN', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
@@ -1090,7 +1114,7 @@ INSERT INTO `members` (`id`, `intitule`, `accno`, `diver`, `titre`, `addresse`, 
 (929, 'LEGRAND JACQUES', NULL, 'NR/10', 'M.', 'Rue de l\'Abbaye 2', '5340', 'FAULX-LES-TOMBES', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (930, 'BARETTE-MIGNOLET SARAH', NULL, '', 'Mme', 'RUE DU WAINAGE 218', '6220', 'LAMBUSART', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (931, 'BOEVE MARIE-FRANCE', NULL, '', 'Mme', 'NEERHOFSTRAAT 54', '1700', 'DILBEEK', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
-(932, 'DUBRULLE PIERRE', NULL, '', 'M.', 'Av. VAN SEVER 74', '1970', 'WEZEMBEEK-OPPEM', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
+(932, 'DUBRULLE PIERRE', 'BE74210080476407', '', 'M.', 'Av. VAN SEVER 74', '1970', 'WEZEMBEEK-OPPEM', '', '0000-00-00', '', '', '', 'my comm', '', '', '', '2021-01-31', 5, '1', NULL, NULL, NULL, NULL),
 (933, 'FLUHR JEAN-KESSELER', NULL, '', 'M./Mme', 'CHEMIN DE ROUHEID 170', '4802', 'HEUSY', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (934, 'RATZ REGINALD', NULL, '', 'M.', 'Rue du Perreon 93', '4141', 'LOUVEIGNE', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (935, 'ANTOINE Maryse', NULL, '', 'Mme', 'pl. communale 45', '4684', 'HACCOURT', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
@@ -1782,7 +1806,7 @@ INSERT INTO `members` (`id`, `intitule`, `accno`, `diver`, `titre`, `addresse`, 
 (1619, 'AUBERTE BRIGITTE', NULL, '', 'MME', 'AVE REINE ASTRID 10', '7700', 'MOUSCRON', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (1620, 'TRISMAN J.M. - RENAUX M.', NULL, '', 'M/MME', 'GRAND-ROUTE 91', '4537', 'VERLAINE', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (1621, 'OSTER', NULL, 'HT/13', 'M', 'RUE DE LA CHAPELLE 38', '1430', 'REBECQ', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
-(1622, 'DE GELAS LOUISA', NULL, '', 'MME', 'WATERPOEL 79', '1652', 'ALSEMBERG', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
+(1622, 'DE GELAS', 'BE36363021673981', '', 'MME', 'WATERPOEL 79', '1652', 'ALSEMBERG', '', '0000-00-00', '', '', '', '', '', '', '', '2021-01-03', 40, '1', NULL, NULL, NULL, NULL),
 (1623, 'CAB MEDICAL FARRAUTO ALBERTO', NULL, '', '', 'R.FERD. NICOLAY 690', '4420', 'TILLEUR', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (1624, 'HAEGEMAN BERNADETTE', NULL, '', 'MME', 'RUE ROGER HENOCK 1 BTE 48B', '6567', 'MERBES-LE-CHATEAU', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (1625, 'LEGROS R.', NULL, '', 'M', 'AVENUE DE THOUARS 1C/A17', '4280', 'HANNUT', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
@@ -2278,7 +2302,7 @@ INSERT INTO `members` (`id`, `intitule`, `accno`, `diver`, `titre`, `addresse`, 
 (2113, 'MILARD', NULL, 'LX/14', 'M', 'AVE HERBOFIN 11', '6800', 'LIBRAMONT', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (2114, 'GEORGES FREDERIC', NULL, 'LX/14', 'M', 'AU ROND CHENE 45', '4053', 'EMBOURG', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (2115, 'KOECKX PATRICIA', NULL, 'LX/14', 'MME', 'AVE DE BROQUEVILLE 127', '1200', 'WOLUWE-ST-LAMBERT', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
-(2116, 'NANIOT CHRISTIAN', NULL, '', 'M', 'RUE FETIS 26 A402', '5500', 'DINANT', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
+(2116, 'NANIOT CHRISTIAN', 'BE95144056151158', '', 'M', 'RUE FETIS 26 A402', '5500', 'DINANT', '', '0000-00-00', '', '', '', '', '', '', '', '2021-01-31', 5, '1', NULL, NULL, NULL, NULL),
 (2117, 'MAGEROTTE JACQUELINE', NULL, 'LX/14', 'Mme', 'RUE DE SAINT HUBERT 42', '6870', 'SAINT-HUBERT', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (2118, 'LONCHAY', NULL, 'LX/14', 'M', 'RUE DU CENTRE 36', '6640', 'SIBRET', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (2119, 'CNOCKAERT PIERRE', NULL, '', 'M', 'RUE DU PARADIS 38', '1400', 'NIVELLES', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
@@ -3469,12 +3493,12 @@ INSERT INTO `members` (`id`, `intitule`, `accno`, `diver`, `titre`, `addresse`, 
 (3300, 'PATZWAHL STEFFEN', NULL, '', 'M', 'LE DOMAINE 1/0033', '7940', 'CAMBON/CASTEAU', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (3301, 'COOREMAN MARIE', NULL, '', 'MME', 'AVE ALBERT DUMONT 7', '1200', 'WOLUWE-ST-LAMBERT', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (3302, 'RUBA SALEH', NULL, '', 'MRS', 'RUE CERVANTES 04 BTE47', '1190', 'FOREST', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
-(3303, 'ASSENMACHER MARIE', NULL, '', 'MELLE', 'AVE DE L ECHEVINAGE 34', '1180', 'BRUXELLES 18', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
+(3303, 'ASSENMACHER MARIE', NULL, '', 'MELLE', 'AVE DE L ECHEVINAGE 34', '1180', 'BRUXELLES 18', '', '0000-00-00', '', '', '', '\'lobster | \'\'hyster | \'abc |', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (3304, 'VINCENT ANNE-MARIE', NULL, '', 'MME', 'AVE DE LA CROIX ROUGE 1/47', '4500', 'HUY', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (3305, 'GOETGHEBUER-DE JACQUIER DE', NULL, '', 'M/MME', 'RUE ALPHONSE ROBERT 30', '1315', 'INCOURT', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (3306, 'BASKET TONGEREN', NULL, '', 'VZW', 'WIRIXSTRAAT 37', '3700', 'TONGEREN', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (3307, 'TOSSUT - HUET', NULL, '', 'M/MME', 'A VI BON DJU 8', '4350', 'REMICOURT', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
-(3308, 'PAPAVASSILIOU-DOTET', NULL, '', 'M/MME', 'RUE DE LA MARSALLE 28', '4040', 'HERSTAL', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
+(3308, 'PAPAVASSILIOU-DOTET', NULL, '', 'M/MME', 'RUE DE LA MARSALLE 28', '4040', 'HERSTAL', '', '0000-00-00', '', '', '', '\'lobster | \'\'hyster | \'abc |', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (3309, 'LEJEUNE BENOIT', NULL, '', 'M', 'RUE GENERAL BERTRAND 82', '4000', 'LIEGE', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (3310, 'EVRARD ANDRE', NULL, '', 'M', 'RUE DES GENETS 32', '4420', 'SAINT-NICOLAS', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (3311, 'MARECHAL INGRID', NULL, '', 'MME', 'RUE GENERAL BERTRAND 90', '4000', 'LIEGE', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
@@ -3511,9 +3535,9 @@ INSERT INTO `members` (`id`, `intitule`, `accno`, `diver`, `titre`, `addresse`, 
 (3342, 'GREGOIRE - PAGANO', NULL, '', 'M/MME', 'AVE DE LA FERME ROSE 10/29', '1180', 'UCCLE', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (3343, 'ZAFFUTO DANIELE', NULL, '', 'MME', 'RUE LONGUE 8', '4000', 'LIEGE', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (3344, 'VITSKENS DAGNEAU', NULL, '', 'M', 'FAUBOURG DE MIGNAULT 3', '7070', 'LE ROEULX', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
-(3345, 'KIWANIS LE ROEULX', NULL, '', '', 'PLACE DE GOEGNIES 27/2', '7110', 'HOUDENG-GOEGNIES', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
-(3346, 'FRANCOIS-HENNEBERT', NULL, '', 'M/MME', 'RUE D HOUDENG 83', '7070', 'LE ROEULX', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL);
+(3345, 'KIWANIS LE ROEULX', NULL, '', '', 'PLACE DE GOEGNIES 27/2', '7110', 'HOUDENG-GOEGNIES', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL);
 INSERT INTO `members` (`id`, `intitule`, `accno`, `diver`, `titre`, `addresse`, `cp`, `localite`, `email`, `naissance`, `tele`, `numero_enterprise`, `numero_d_ordre`, `communication`, `rubans`, `newsletter`, `newsletter_rcv`, `dervst`, `cumulvst`, `status`, `last_modified_by`, `created_by`, `create_date`, `last_modified_date`) VALUES
+(3346, 'FRANCOIS-HENNEBERT', NULL, '', 'M/MME', 'RUE D HOUDENG 83', '7070', 'LE ROEULX', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (3347, 'JACQUES FABIAN', NULL, '', 'M', 'RUE DE NEUFVILLES 115', '7060', 'SOIGNIES', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (3348, 'QUERMIA ARLETTE', NULL, 'TESTAMENT', 'MME', 'AV JULES BORDET 66', '1140', 'BRUXELLES', 'arlettequermia@gmail.com', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (3349, 'VAN STRAELEN CHRISTINA', NULL, 'TESTAMENT', 'MME', 'AVE EUGENE DEMOLDER 26', '1030', 'SCHAERBEEK', 'christina_van_straelen@hotmail.com', '0000-00-00', '02/215 16 39', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
@@ -3792,9 +3816,9 @@ INSERT INTO `members` (`id`, `intitule`, `accno`, `diver`, `titre`, `addresse`, 
 (3622, 'CROCHET VERONIQUE', NULL, 'LX/19', 'MME', 'RUE NEUVE 323', '6717', 'METZERT-ATTERT', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (3623, 'DEBACKER MARIE-HELENE', NULL, 'LX/19', 'MME', 'AVE DE LA TOISON D\'OR 122', '6900', 'MARCHE-EN-FAMENNE', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (3624, 'SCHOUMAKER ALPHONSE', NULL, 'LX/19', 'M', 'AVE DE BOUILLON 46', '6800', 'LIBRAMONT-CHEVIGNY', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
-(3625, 'VAN DAELE RITA', NULL, 'LX/19', 'MME', 'RUE DU BOIS MOREAU 25', '6640', 'VAUX-SUR-SURE', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
-(3626, 'CENTRE LORRAIN D HBGT', NULL, 'LX/19', 'ASBL', 'RUE DU BEYNERT 15', '6700', 'ARLON', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL);
+(3625, 'VAN DAELE RITA', NULL, 'LX/19', 'MME', 'RUE DU BOIS MOREAU 25', '6640', 'VAUX-SUR-SURE', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL);
 INSERT INTO `members` (`id`, `intitule`, `accno`, `diver`, `titre`, `addresse`, `cp`, `localite`, `email`, `naissance`, `tele`, `numero_enterprise`, `numero_d_ordre`, `communication`, `rubans`, `newsletter`, `newsletter_rcv`, `dervst`, `cumulvst`, `status`, `last_modified_by`, `created_by`, `create_date`, `last_modified_date`) VALUES
+(3626, 'CENTRE LORRAIN D HBGT', NULL, 'LX/19', 'ASBL', 'RUE DU BEYNERT 15', '6700', 'ARLON', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (3627, 'MORSOMME PAULA', NULL, 'LX/19', 'MME', 'BOIS NOTRE DAME 18', '6900', 'MARCHE-EN-FAMENNE', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (3628, 'DELIGNIERE DENISE', NULL, 'LX/19', 'MME', 'RUE DE LA CHAPELLE 7', '6600', 'BASTOGNE', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
 (3629, 'GASPARD FRANCIS', NULL, 'LX/19', 'M', 'RUE DE LA MALADRIE 26', '6687', 'BERTOGNE', '', '0000-00-00', '', '', '', '', '', '', '', NULL, NULL, '1', NULL, NULL, NULL, NULL),
@@ -3970,15 +3994,36 @@ INSERT INTO `members` (`id`, `intitule`, `accno`, `diver`, `titre`, `addresse`, 
 (3799, 'DHR. ERNEST EDWARDS', 'BE49850887217871', 'DIVER', 'MR', '', '13121', 'LOCATION', '', '0000-00-00', '', '', '', '', '', '', '', '2021-02-15', 200, '1', NULL, NULL, NULL, NULL),
 (3801, 'FERIRE PASCAL', 'BE92734038743223', '', 'MR', '', '231315', 'LOCATION', '', '0000-00-00', '', '', '', '', '', '', '', '2021-02-15', 700, '1', NULL, NULL, NULL, NULL),
 (3802, 'DOUTREWE JEAN', 'BE12240057316492', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '2021-02-15', 40, '1', NULL, NULL, NULL, NULL),
-(3803, 'JOY SARKAR', '', 'PAYPAL', 'MR', 'PUNE', '41104', 'WAKAD', 'skylinemeridian@gmail.com', '1988-10-15', '7003580307', '', '', '', '', '', '', '0000-00-00', 20, '0', NULL, NULL, NULL, NULL),
+(3803, 'JOY SARKAR', '124535245853', 'PAYPAL', 'MR', 'PUNE', '41104', 'WAKAD', 'skylinemeridian@gmail.com', '1988-10-15', '7003580307', '', '', 'asd | new communication | jihi | ', '', '', '', '0000-00-00', 140, '1', NULL, NULL, NULL, NULL),
 (3805, 'MME MARIETTE PESSER', 'BE69850847661978', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '2020,2021', '', '2021-02-15', 100, '1', NULL, NULL, NULL, NULL),
 (3806, 'M EDOUARD NIFFLE', 'BE11363137469248', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '2021-02-15', 20, '1', NULL, NULL, NULL, NULL),
 (3807, 'BOSSICART-MARENNE', 'BE92001856504723', '', '', '', '', '', '', '0000-00-00', '', '', '', 'New Entry', '2020', '2021', '', '2021-08-05', 60, '1', NULL, NULL, NULL, NULL),
-(3808, 'JAYANTA', 'BE12240057316492', 'Testament', 'MR', 'Jetia Bakultala, 24 Parganas North.', '743135', 'LOCATION', 'jtas.sarkar@gmail.com', '2021-10-23', '07003580307', '', '', 'New Entry 2021', '2020', '2021', '', '2021-10-23', 20, '1', NULL, NULL, NULL, NULL),
+(3808, 'JAYANTA', 'BE12240057316492', 'Testament', 'MR', 'Jetia Bakultala, 24 Parganas North.', '743135', 'LOCATION', 'jtas.sarkar@gmail.com', '2021-10-23', '07003580307', '', '', 'asd | new communication | jihi | ', '2020', '2021', '', '2021-10-23', 20, '1', NULL, NULL, NULL, NULL),
 (3809, 'SARKAR', '1234567897', 'HT', 'MR', 'Jetia Bakultala, 24 Parganas North.', '743135', 'Local', 'jtas.sarkar@gmail.com', '2021-10-08', '07003580307', '', '', 'New Entry 2100', '2020', '2013', '', '2021-10-31', 56, '1', NULL, NULL, NULL, NULL),
-(3810, 'JOCELYNE WILLIEME', 'BE48651164698427', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '2021-08-05', 50, '1', NULL, NULL, NULL, NULL),
-(3811, 'LAPRAILLE C. - HAINAUX A.', 'BE88103066481141', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '2021-08-05', 25, '1', NULL, NULL, NULL, NULL),
-(3812, 'COX - VONCKEN', 'BE39792534990519', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '2021-05-03', 90, '1', NULL, NULL, NULL, NULL);
+(3810, 'JOCELYNE WILLIEME', 'BE48651164698427', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '2021-08-05', 350, '1', NULL, NULL, NULL, NULL),
+(3811, 'LAPRAILLE C. - HAINAUX A.', 'BE88103066481141', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '2021-08-05', 125, '1', NULL, NULL, NULL, NULL),
+(3812, 'COX - VONCKEN', 'BE39792534990519', '', '', 'RUE DES TROIS FERMES 26', '4600', 'VISE', '', '0000-00-00', '', '', '', '', '', '', '', '2021-05-03', 190, '1', NULL, NULL, NULL, NULL),
+(3813, 'LASSENCE-GOFFLOT', 'BE62001411821761', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '2021-08-05', 480, '1', NULL, NULL, NULL, NULL),
+(3814, 'M CYRIL HUBERT OU MME ELISE LEJE', 'BE43109666095201', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '2021-08-05', 60, '1', NULL, NULL, NULL, NULL),
+(3815, 'MLLE MARIE-EVE HUBERMONT', 'BE81652800865024', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '2021-08-05', 30, '1', NULL, NULL, NULL, NULL),
+(3816, 'M MICHEL SEIDEL', 'BE96367013866205', 'Testament', 'Mr', 'Some Address', '1000', 'Brussels', 'jtas.sarkar@gmail.com', '2021-11-26', '9876554321', '', '', 'comm', '', '', '', '2021-08-05', 8, '1', NULL, NULL, NULL, NULL),
+(3817, 'MLLE VERONIQUE BASTIN', 'BE93103014443267', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '2021-08-05', 50, '1', NULL, NULL, NULL, NULL),
+(3818, 'MARBEL SRL', 'BE29068907419364', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '2021-08-05', 5900, '1', NULL, NULL, NULL, NULL),
+(3819, 'MLLE LAURENCE BASTIN', 'BE30360111502011', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '2021-08-05', 55, '1', NULL, NULL, NULL, NULL),
+(3820, 'ME VE J.PONCELET-ERLICHMAN', 'BE51001300640462', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '2021-08-05', 17, '1', NULL, NULL, NULL, NULL),
+(3821, 'OGER DRAUX', 'BE21360111646703', 'Testament/Retour', 'Mr', 'Some Address', '1000', 'Brussels', 'jtas.sarkar@gmail.com', '2021-12-03', '9876554321', '', '', 'comm', '', '', '', '2021-08-05', 80, '1', NULL, NULL, NULL, NULL),
+(3822, 'MME ANNE MARIE LAPRAILLE', 'BE44360112436645', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '2021-08-05', 25, '1', NULL, NULL, NULL, NULL),
+(3823, 'MME ANNE MARIE LAPRAILLE', 'BE44360112436645', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '2021-08-05', 30, '1', NULL, NULL, NULL, NULL),
+(3824, 'NOEL CHARLOTTE', 'BE73001487675660', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '2021-08-05', 65, '1', NULL, NULL, NULL, NULL),
+(3825, 'U.S. MELLIER ASBL', 'BE59001194771026', '', '', 'Some Address', '1000', 'Brussels', '', '0000-00-00', '', '', '', '', '', '', '', '2021-08-05', 50, '1', NULL, NULL, NULL, NULL),
+(3826, 'PIERRARD - PIERRARD', 'BE73776594363860', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '2021-08-05', 65, '1', NULL, NULL, NULL, NULL),
+(3827, 'VANNEROM JADOS JOHAN', 'BE80310153462877', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '2021-08-05', 12.5, '1', NULL, NULL, NULL, NULL),
+(3828, 'SCHMIDT AMANDINE - MASSON XAVIER', 'BE43750655093201', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '2021-08-05', 50, '1', NULL, NULL, NULL, NULL),
+(3829, 'VERTE-DUPLICY AUBERTE', 'LU570019125542858000', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '2021-08-05', 50, '1', NULL, NULL, NULL, NULL),
+(3830, 'LIENARD LAURENCE', 'BE36063994109181', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '2021-02-11', 10, '1', NULL, NULL, NULL, NULL),
+(3831, 'Jayyanta', '5009qGSTPM', 'Testament/Retour', 'MrKhiladi', 'Some Address', '1001', 'Brussels', '15151@gmail.com', '1988-10-15', '9876554321', '', '', 'asd | new communication | comm2', '', '', '', '2021-10-22', 150, '1', NULL, NULL, NULL, NULL),
+(3832, 'STIEVENARD LAETITIA', 'BE32063698648902', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '2021-01-19', 24, '1', NULL, NULL, NULL, NULL),
+(3833, 'Joy', '1234567890', 'BW', 'Mr', 'Some Address', '1000', 'Brussels', 'jtas.sarkar@gmail.com', '1988-01-15', '9876554321', '', '', 'comm', '', '', '', '2021-11-18', 10, '1', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -3990,16 +4035,43 @@ CREATE TABLE `reports` (
   `id` int(11) NOT NULL,
   `query_name` varchar(255) NOT NULL,
   `query` varchar(255) NOT NULL,
-  `remarks` text NOT NULL
+  `remarks` text NOT NULL,
+  `added_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `reports`
 --
 
-INSERT INTO `reports` (`id`, `query_name`, `query`, `remarks`) VALUES
-(1, '1st search', 'SELECT m.*, SUM(cd.tr_amount) AS amount FROM members AS m \r\n                INNER JOIN coda_data AS cd \r\n                ON m.id = cd.member_id WHERE cd.coda_date BETWEEN CAST(\'1921-10-26\' AS DATE) AND CAST(\'2021-10-26\' AS DATE)         Group By m.id', ''),
-(2, 'only 2', 'SELECT m.*, SUM(cd.tr_amount) AS amount FROM members AS m \r\n                INNER JOIN coda_data AS cd \r\n                ON m.id = cd.member_id WHERE cd.coda_date BETWEEN CAST(\'1921-10-26\' AS DATE) AND CAST(\'2012-01-13\' AS DATE)         Group By m.id', '');
+INSERT INTO `reports` (`id`, `query_name`, `query`, `remarks`, `added_date`) VALUES
+(5, 'chandra testing', 'SELECT m.*, SUM(tr_amount) AS amount FROM members AS m \n                INNER JOIN coda_data AS cd \n                ON m.id = cd.member_id WHERE cd.tr_date BETWEEN CAST(\'1921-10-28\' AS DATE) AND CAST(\'2021-10-28\' AS DATE)         Group By m.id', '', '2021-10-28'),
+(6, 'chandra', 'SELECT m.*, SUM(tr_amount) AS amount FROM members AS m \n                INNER JOIN coda_data AS cd \n                ON m.id = cd.member_id WHERE cd.tr_date BETWEEN CAST(\'1921-10-28\' AS DATE) AND CAST(\'2021-10-28\' AS DATE)         Group By m.id', '', '2021-10-28');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(25) NOT NULL,
+  `uname` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `upass` varchar(255) NOT NULL,
+  `status` enum('1','0') NOT NULL DEFAULT '1',
+  `created_at` datetime NOT NULL,
+  `last_modified_date` datetime NOT NULL,
+  `mdCode` varchar(25) NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `uname`, `email`, `upass`, `status`, `created_at`, `last_modified_date`, `mdCode`, `updated_at`) VALUES
+(4, 'chandra', 'chandra@gmail.com', '$2y$04$J1a4.WBMoB9JTyJf4.muVuSmIeuB4nVAD8TOpaoYcq8JwPpAY.tUK', '1', '2021-10-29 08:51:22', '0000-00-00 00:00:00', '6ec42d3e903aab47ab9c1784e', '2021-10-29 08:51:22'),
+(5, 'Joy', 'jtas.sarkar@gmail.com', '$2y$04$whstVIaxzbJgnelONEnRluNcsxBXmklZWQNHW3r3f0Euby3NkJiKe', '1', '2021-10-29 18:43:15', '0000-00-00 00:00:00', '', '2021-10-29 18:43:15');
 
 --
 -- Indexes for dumped tables
@@ -4030,6 +4102,12 @@ ALTER TABLE `reports`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -4043,19 +4121,25 @@ ALTER TABLE `accounts`
 -- AUTO_INCREMENT for table `coda_data`
 --
 ALTER TABLE `coda_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `members`
 --
 ALTER TABLE `members`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3813;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3834;
 
 --
 -- AUTO_INCREMENT for table `reports`
 --
 ALTER TABLE `reports`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
