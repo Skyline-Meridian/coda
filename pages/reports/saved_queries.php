@@ -1,8 +1,8 @@
 <?php
 include '../../header.php';
 include '../../db_config.php';
-if(!$_SESSION['id']){
-header('location:../login.php');
+if (!$_SESSION['id']) {
+    header('location:../login.php');
 }
 ?>
 <!-- Navbar -->
@@ -39,7 +39,7 @@ header('location:../login.php');
                                             <tr>
                                                 <th width="30%">Requête</th>
                                                 <th width="50%">Titre</th>
-                                                 <th width="50%">Date</th>
+                                                <th width="50%">Date</th>
                                                 <th width="20%">Action</th>
                                             </tr>
                                         </thead>
@@ -55,20 +55,43 @@ header('location:../login.php');
 
             <?php include '../../footer.php'; ?>
             <script>
-
-                jQuery(document).ready(function($) {  
+                jQuery(document).ready(function($) {
                     $('#query_table').DataTable({
                         destroy: true,
+                        language: {
+                            "sProcessing": "Chargement...",
+                            "sLengthMenu": "Afficher _MENU_ entrées",
+                            "sZeroRecords": "Rien n'a été trouvé",
+                            "sEmptyTable": "Rien n'a été trouvé",
+                            "sInfo": "Affichage de _START_ à _END_ sur _TOTAL_ entrées",
+                            "sInfoEmpty": "Affichage de 0 à 0 sur 0 entrées",
+                            "sInfoFiltered": "(filtré à partir de _MAX_ entrées)",
+                            "sInfoPostFix": "",
+                            "sSearch": "Recherche:",
+                            "sUrl": "",
+                            "sInfoThousands": ",",
+                            "sLoadingRecords": "Chargement...",
+                            "oPaginate": {
+                                "sFirst": "Première",
+                                "sLast": "Dernier",
+                                "sNext": "Suivant",
+                                "sPrevious": "Précédente"
+                            },
+                        },
                         ajax: {
                             type: 'post',
                             url: '../../services/reports/get_saved_queries.php',
                             dataSrc: '',
                         },
-                        columns: [
-                            { "data": "id" },
-                            { "data": "query_name" },
-                            { "data": "added_date",
-                                render: function (data, type, row) {
+                        columns: [{
+                                "data": "id"
+                            },
+                            {
+                                "data": "query_name"
+                            },
+                            {
+                                "data": "added_date",
+                                render: function(data, type, row) {
                                     return moment(new Date(data).toString()).format('DD-MM-YYYY');
                                 }
                             },
